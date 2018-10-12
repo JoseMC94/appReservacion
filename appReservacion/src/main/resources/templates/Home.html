@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<div th:fragment="content">
+
+
+    <h3>Usuario : <span th:text="${user}" ></span></h3>
+    <br/>
+    <br/>
+
+
+    <ul>
+        <li>
+            <a th:href="@{/empleado}">vista empleados</a>
+        </li>
+        <li>
+            <a th:href="@{/administrador}">Vista Administrador</a>
+        </li>
+
+
+
+        <li>
+            <a th:href="@{/administrador}">Vista Consejo Facultad</a>
+        </li>
+    </ul>
+    <br/>
+    <br/>
+
+
+
+    <tr th:each="person : ${miembros}">
+        <td th:text="${person.nombre}"></td>
+        <td th:text="${person.apellidopaterno}"></td>
+        <td th:text="${person.apellidomaterno}"></td>
+    </tr>
+
+
+    <form th:action="@{/logout}" method="post">
+        <button class="btn  btn-primary btn-block" type="submit">SALIR</button>
+    </form>
+</div>
+
+
+
+</body>
+</html>
