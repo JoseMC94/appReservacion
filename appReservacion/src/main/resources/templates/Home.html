@@ -35,11 +35,7 @@
 
 
 
-    <tr th:each="person : ${miembros}">
-        <td th:text="${person.nombre}"></td>
-        <td th:text="${person.apellidopaterno}"></td>
-        <td th:text="${person.apellidomaterno}"></td>
-    </tr>
+
 
 
     <form th:action="@{/logout}" method="post">

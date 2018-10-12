@@ -11,7 +11,7 @@ module.exports = function(Chart) {
 		// Use a registration function so that we can move to an ES6 map when we no longer need to support
 		// old browsers
 
-		// Scale config defaults
+		// Scale Config defaults
 		defaults: {},
 		registerScaleType: function(type, scaleConstructor, defaults) {
 			this.constructors[type] = scaleConstructor;

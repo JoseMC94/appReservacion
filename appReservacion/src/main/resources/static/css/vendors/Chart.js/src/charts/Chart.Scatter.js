@@ -33,7 +33,7 @@ module.exports = function(Chart) {
 		}
 	};
 
-	// Register the default config for this type
+	// Register the default Config for this type
 	Chart.defaults.scatter = defaultConfig;
 
 	// Scatter charts use line controllers

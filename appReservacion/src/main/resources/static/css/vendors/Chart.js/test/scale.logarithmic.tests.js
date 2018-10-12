@@ -14,7 +14,7 @@ describe('Logarithmic Scale tests', function() {
 		expect(typeof Constructor).toBe('function');
 	});
 
-	it('should have the correct default config', function() {
+	it('should have the correct default Config', function() {
 		var defaultConfig = Chart.scaleService.getScaleDefaults('logarithmic');
 		expect(defaultConfig).toEqual({
 			display: true,

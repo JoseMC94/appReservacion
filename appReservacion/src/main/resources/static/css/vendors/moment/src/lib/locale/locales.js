@@ -6,7 +6,7 @@ import { mergeConfigs } from './set';
 import { Locale } from './constructor';
 import keys from '../utils/keys';
 
-// internal storage for locale config files
+// internal storage for locale Config files
 var locales = {};
 var globalLocale;
 
@@ -84,15 +84,15 @@ export function defineLocale (name, config) {
         config.abbr = name;
         if (locales[name] != null) {
             deprecateSimple('defineLocaleOverride',
-                    'use moment.updateLocale(localeName, config) to change ' +
+                    'use moment.updateLocale(localeName, Config) to change ' +
                     'an existing locale. moment.defineLocale(localeName, ' +
-                    'config) should only be used for creating a new locale');
+                    'Config) should only be used for creating a new locale');
             config = mergeConfigs(locales[name]._config, config);
         } else if (config.parentLocale != null) {
             if (locales[config.parentLocale] != null) {
                 config = mergeConfigs(locales[config.parentLocale]._config, config);
             } else {
-                // treat as if there is no base config
+                // treat as if there is no base Config
                 deprecateSimple('parentLocaleUndefined',
                         'specified parentLocale is not defined yet');
             }
@@ -123,7 +123,7 @@ export function updateLocale(name, config) {
         // backwards compat for now: also set the locale
         getSetGlobalLocale(name);
     } else {
-        // pass null for config to unupdate, useful for tests
+        // pass null for Config to unupdate, useful for tests
         if (locales[name] != null) {
             if (locales[name].parentLocale != null) {
                 locales[name] = locales[name].parentLocale;

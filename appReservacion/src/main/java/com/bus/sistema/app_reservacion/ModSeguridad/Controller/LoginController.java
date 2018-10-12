@@ -39,7 +39,7 @@ public class LoginController {
 
     @GetMapping({"/loginsucces"})
     public String loginCheck() {
-        return "redirect:/home";
+        return "redirect:/Home/home";
     }
 
 }

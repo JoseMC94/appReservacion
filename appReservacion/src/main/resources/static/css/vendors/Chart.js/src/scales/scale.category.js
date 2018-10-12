@@ -3,7 +3,7 @@
 module.exports = function(Chart) {
 
 	var helpers = Chart.helpers;
-	// Default config for a category scale
+	// Default Config for a category scale
 	var defaultConfig = {
 		position: "bottom"
 	};

@@ -41,7 +41,7 @@ describe('Time scale tests', function() {
 		expect(typeof Constructor).toBe('function');
 	});
 
-	it('Should have the correct default config', function() {
+	it('Should have the correct default Config', function() {
 		var defaultConfig = Chart.scaleService.getScaleDefaults('time');
 		expect(defaultConfig).toEqual({
 			display: true,
@@ -111,7 +111,7 @@ describe('Time scale tests', function() {
 		var Constructor = Chart.scaleService.getScaleConstructor('time');
 		var scale = new Constructor({
 			ctx: mockContext,
-			options: Chart.scaleService.getScaleDefaults('time'), // use default config for scale
+			options: Chart.scaleService.getScaleDefaults('time'), // use default Config for scale
 			chart: {
 				data: mockData
 			},
@@ -140,7 +140,7 @@ describe('Time scale tests', function() {
 		var Constructor = Chart.scaleService.getScaleConstructor('time');
 		var scale = new Constructor({
 			ctx: mockContext,
-			options: Chart.scaleService.getScaleDefaults('time'), // use default config for scale
+			options: Chart.scaleService.getScaleDefaults('time'), // use default Config for scale
 			chart: {
 				data: mockData
 			},
@@ -252,7 +252,7 @@ describe('Time scale tests', function() {
 		expect(xScale.ticks[1]).toEqualOneOf(['Nov 19, 1981', 'Nov 20, 1981', 'Nov 21, 1981']); // handle time zone changes
 	});
 
-	it('should build ticks using the config unit', function() {
+	it('should build ticks using the Config unit', function() {
 		var scaleID = 'myScale';
 
 		var mockData = {
@@ -265,7 +265,7 @@ describe('Time scale tests', function() {
 		var Constructor = Chart.scaleService.getScaleConstructor('time');
 		var scale = new Constructor({
 			ctx: mockContext,
-			options: config, // use default config for scale
+			options: config, // use default Config for scale
 			chart: {
 				data: mockData
 			},
@@ -277,7 +277,7 @@ describe('Time scale tests', function() {
 		expect(scale.ticks).toEqual(['Jan 1, 8PM', 'Jan 1, 9PM', 'Jan 1, 10PM', 'Jan 1, 11PM', 'Jan 2, 12AM', 'Jan 2, 1AM', 'Jan 2, 2AM', 'Jan 2, 3AM', 'Jan 2, 4AM', 'Jan 2, 5AM', 'Jan 2, 6AM', 'Jan 2, 7AM', 'Jan 2, 8AM', 'Jan 2, 9AM', 'Jan 2, 10AM', 'Jan 2, 11AM', 'Jan 2, 12PM', 'Jan 2, 1PM', 'Jan 2, 2PM', 'Jan 2, 3PM', 'Jan 2, 4PM', 'Jan 2, 5PM', 'Jan 2, 6PM', 'Jan 2, 7PM', 'Jan 2, 8PM', 'Jan 2, 9PM']);
 	});
 
-	it('should build ticks using the config diff', function() {
+	it('should build ticks using the Config diff', function() {
 		var scaleID = 'myScale';
 
 		var mockData = {
@@ -291,7 +291,7 @@ describe('Time scale tests', function() {
 		var Constructor = Chart.scaleService.getScaleConstructor('time');
 		var scale = new Constructor({
 			ctx: mockContext,
-			options: config, // use default config for scale
+			options: config, // use default Config for scale
 			chart: {
 				data: mockData
 			},
@@ -319,7 +319,7 @@ describe('Time scale tests', function() {
 		var Constructor = Chart.scaleService.getScaleConstructor('time');
 		var scale = new Constructor({
 			ctx: mockContext,
-			options: config, // use default config for scale
+			options: config, // use default Config for scale
 			chart: {
 				data: mockData
 			},
@@ -349,7 +349,7 @@ describe('Time scale tests', function() {
 		var Constructor = Chart.scaleService.getScaleConstructor('time');
 		var scale = new Constructor({
 			ctx: mockContext,
-			options: config, // use default config for scale
+			options: config, // use default Config for scale
 			chart: {
 				data: mockData
 			},

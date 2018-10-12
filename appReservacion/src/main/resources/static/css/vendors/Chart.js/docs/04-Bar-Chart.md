@@ -119,7 +119,7 @@ new Chart(ctx, {
 		}
 	}
 });
-// This will create a chart with all of the default options, merged from the global config,
+Config
 //  and the Bar chart defaults but this particular instance will have `stacked` set to true
 // for both x and y axes.
 ```

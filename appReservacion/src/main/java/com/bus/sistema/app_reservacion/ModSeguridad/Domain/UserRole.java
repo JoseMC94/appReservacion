@@ -1,57 +1,62 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
-import javax.persistence.*;
-import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 
 @Entity
-@Table(name = "user_role", schema = "reservacion", catalog = "")
+@Table(name ="user_Role", uniqueConstraints = @UniqueConstraint(
+        columnNames = {"role","username"}
+))
 public class UserRole {
-    private int userRole;
-    private String role;
-    private String username;
 
     @Id
-    @Column(name = "user_role", nullable = false)
-    public int getUserRole() {
-        return userRole;
+    @GeneratedValue
+    @Column(name = "user_role",unique = true,nullable = false)
+    private int userRoleId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "username",nullable = false)
+    private User user;
+    @Column(name = "role", nullable = false,length = 45)
+    private String role;
+
+    public UserRole() {
+    }
+    public UserRole(User user, String role) {
+        this.user = user;
+        this.role = role;
     }
 
-    public void setUserRole(int userRole) {
-        this.userRole = userRole;
+    public int getUserRoleId() {
+        return userRoleId;
     }
 
-    @Basic
-    @Column(name = "role", nullable = false, length = 45)
+    public void setUserRoleId(int userRoleId) {
+        this.userRoleId = userRoleId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    @Basic
-    @Column(name = "username", nullable = false, length = 45)
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserRole userRole1 = (UserRole) o;
-        return userRole == userRole1.userRole &&
-                Objects.equals(role, userRole1.role) &&
-                Objects.equals(username, userRole1.username);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userRole, role, username);
     }
 }

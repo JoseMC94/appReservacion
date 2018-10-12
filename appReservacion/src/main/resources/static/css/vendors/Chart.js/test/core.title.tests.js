@@ -6,7 +6,7 @@ describe('Title block tests', function() {
 		expect(title).not.toBe(undefined);
 	});
 
-	it('Should have the correct default config', function() {
+	it('Should have the correct default Config', function() {
 		expect(Chart.defaults.global.title).toEqual({
 			display: false,
 			position: 'top',

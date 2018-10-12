@@ -1,5 +1,5 @@
-// Test the bubble chart default config
-describe("Test the bubble chart default config", function() {
+// Test the bubble chart default Config
+describe("Test the bubble chart default Config", function() {
 	it('should reutrn correct tooltip strings', function() {
 		var config = Chart.defaults.bubble;
 
@@ -27,7 +27,7 @@ describe("Test the bubble chart default config", function() {
 	});
 });
 
-describe('Test the doughnut chart default config', function() {
+describe('Test the doughnut chart default Config', function() {
 	it('should return correct tooltip strings', function() {
 		var config = Chart.defaults.doughnut;
 
@@ -159,7 +159,7 @@ describe('Test the doughnut chart default config', function() {
 	});
 });
 
-describe('Test the polar area chart default config', function() {
+describe('Test the polar area chart default Config', function() {
 	it('should return correct tooltip strings', function() {
 		var config = Chart.defaults.polarArea;
 

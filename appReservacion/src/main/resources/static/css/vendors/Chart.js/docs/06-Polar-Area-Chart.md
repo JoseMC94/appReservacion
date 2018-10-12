@@ -101,7 +101,7 @@ new Chart(ctx, {
 		}
 	}
 });
-// This will create a chart with all of the default options, merged from the global config,
+Config
 // and the PolarArea chart defaults but this particular instance will have `elements.arc.borderColor` set to `"#000000"`.
 ```
 

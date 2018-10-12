@@ -209,13 +209,13 @@
 	};
 
 	/** 
-	 * Sets the Time of the current Date instance. A string "6:15 pm" or config object {hour:18, minute:15} are accepted.
+	 * Sets the Time of the current Date instance. A string "6:15 pm" or Config object {hour:18, minute:15} are accepted.
 	 * Example
 	<pre><code>
 	// Set time to 6:15pm with a String
 	Date.today().at("6:15pm");
 
-	// Set time to 6:15pm with a config object
+	// Set time to 6:15pm with a Config object
 	Date.today().at({hour:18, minute:15});
 	</code></pre>
 	 *  
@@ -304,7 +304,7 @@
 	};
    
    /** 
-	 * Returns a date created from an object literal. Ignores the .week property if set in the config. 
+	 * Returns a date created from an object literal. Ignores the .week property if set in the Config. 
 	 * Example
 	<pre><code>
 	var o = new Date().toObject();

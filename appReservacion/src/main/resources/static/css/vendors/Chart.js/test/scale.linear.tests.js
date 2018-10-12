@@ -18,7 +18,7 @@ describe('Linear Scale', function() {
 		expect(typeof Constructor).toBe('function');
 	});
 
-	it('Should have the correct default config', function() {
+	it('Should have the correct default Config', function() {
 		var defaultConfig = Chart.scaleService.getScaleDefaults('linear');
 		expect(defaultConfig).toEqual({
 			display: true,

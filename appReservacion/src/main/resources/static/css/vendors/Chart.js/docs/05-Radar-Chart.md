@@ -116,7 +116,7 @@ new Chart(ctx, {
 			}
 	}
 });
-// This will create a chart with all of the default options, merged from the global config,
+Config
 //  and the Radar chart defaults but this particular instance's scale will be reversed as
 // well as the ticks beginning at zero.
 ```

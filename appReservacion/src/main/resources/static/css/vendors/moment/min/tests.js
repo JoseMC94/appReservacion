@@ -63423,7 +63423,7 @@
         assert.equal(moment([2011, 0, 2]).format('dd ddd dddd MMM MMMM'), 'default default default default default', 'format month name function should be able to access the moment object');
     });
 
-    test('changing parts of a locale config', function (assert) {
+    test('changing parts of a locale Config', function (assert) {
         test.expectedDeprecations('defineLocaleOverride');
 
         moment.locale('partial-lang', {

@@ -1,19 +1,49 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
-import javax.persistence.Basic;
+
+import java.util.HashSet;
+import java.util.Set;
+
+//import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name ="user")
 public class User {
-    private String username;
-    private boolean enabled;
-    private String password;
-
     @Id
-    @Column(name = "username", nullable = false, length = 45)
+    @Column(name = "username", unique = true,nullable = false,length = 45)
+    private String username;
+    @Column(name = "password",nullable = false,length = 60)
+    private String pass;
+
+    @Column(name = "enabled",nullable = false)
+    private boolean enabled;
+
+    @OneToMany(fetch =  FetchType.EAGER, mappedBy = "user")
+    private Set<UserRole> userRole = new HashSet<UserRole>();
+
+    public User(){
+
+    }
+
+    public User(String username, String pass, boolean enabled) {
+        this.username = username;
+        this.pass = pass;
+        this.enabled = enabled;
+    }
+
+    public User(String username, String pass, boolean enabled, Set<UserRole> userRole) {
+        this.username = username;
+        this.pass = pass;
+        this.enabled = enabled;
+        this.userRole = userRole;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -22,8 +52,14 @@ public class User {
         this.username = username;
     }
 
-    @Basic
-    @Column(name = "enabled", nullable = false)
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -32,28 +68,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    @Basic
-    @Column(name = "password", nullable = false, length = 60)
-    public String getPassword() {
-        return password;
+    public Set<UserRole> getUserRole() {
+        return userRole;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return enabled == user.enabled &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(password, user.password);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, enabled, password);
+    public void setUserRole(Set<UserRole> userRole) {
+        this.userRole = userRole;
     }
 }

@@ -95,9 +95,9 @@ DROP TABLE IF EXISTS rol_menu;
 CREATE TABLE rol_menu(
 	Id int(11) primary key AUTO_INCREMENT,	
 	RolId int(11) NOT NULL ,
-	FOREIGN KEY(FKRolId) REFERENCES Rol(RolId) on DELETE no action on UPDATE CASCADE,
+	FOREIGN KEY(RolId) REFERENCES Rol(RolId) on DELETE no action on UPDATE CASCADE,
     MenuId int(11) NOT NULL ,
-	FOREIGN KEY(FKMenuId) REFERENCES Menu(MenuId) on DELETE no action on UPDATE CASCADE
+	FOREIGN KEY(MenuId) REFERENCES Menu(MenuId) on DELETE no action on UPDATE CASCADE
 );
 INSERT INTO rol_menu(MenuId,RolId) VALUES (1, 1);
 INSERT INTO rol_menu(MenuId,RolId) VALUES (2, 1);

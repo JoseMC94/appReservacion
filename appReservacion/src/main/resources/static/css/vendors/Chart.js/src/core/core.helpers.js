@@ -63,7 +63,7 @@ module.exports = function(Chart) {
 		helpers.each(Array.prototype.slice.call(arguments, 1), function(extension) {
 			helpers.each(extension, function(value, key) {
 				if (key === 'scales') {
-					// Scale config merging is complex. Add out own function here for that
+					// Scale Config merging is complex. Add out own function here for that
 					base[key] = helpers.scaleMerge(base.hasOwnProperty(key) ? base[key] : {}, value);
 
 				} else if (key === 'scale') {

@@ -1,4 +1,4 @@
-package com.bus.sistema.app_reservacion.ModSeguridad.config;
+package com.bus.sistema.app_reservacion.ModSeguridad.Config;
 
 
 import org.springframework.context.annotation.Configuration;

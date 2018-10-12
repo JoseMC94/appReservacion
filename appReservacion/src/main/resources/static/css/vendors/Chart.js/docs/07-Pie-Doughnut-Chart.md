@@ -106,7 +106,7 @@ new Chart(ctx,{
 		animateScale:true
 	}
 });
-// This will create a chart with all of the default options, merged from the global config,
+Config
 // and the Doughnut chart defaults but this particular instance will have `animateScale` set to `true`.
 ```
 

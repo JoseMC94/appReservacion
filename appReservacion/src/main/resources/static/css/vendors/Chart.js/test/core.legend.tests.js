@@ -14,7 +14,7 @@ describe('Legend block tests', function() {
 		expect(legend).not.toBe(undefined);
 	});
 
-	it('should have the correct default config', function() {
+	it('should have the correct default Config', function() {
 		expect(Chart.defaults.global.legend).toEqual({
 			display: true,
 			position: 'top',

@@ -98,7 +98,7 @@ describe('Core helper tests', function() {
 		});
 	});
 
-	it('should merge a normal config without scales', function() {
+	it('should merge a normal Config without scales', function() {
 		var baseConfig = {
 			valueProp: 5,
 			arrayProp: [1, 2, 3, 4, 5, 6],
@@ -188,11 +188,11 @@ describe('Core helper tests', function() {
 					type: 'linear',
 					axisProp: 456
 				}, {
-					// pulls in linear default config since axis type changes
+					// pulls in linear default Config since axis type changes
 					type: 'linear',
 					position: 'right'
 				}, {
-					// Pulls in linear default config since axis not in base
+					// Pulls in linear default Config since axis not in base
 					type: 'linear'
 				}]
 			}
