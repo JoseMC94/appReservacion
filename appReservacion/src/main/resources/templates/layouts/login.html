@@ -15,8 +15,8 @@
     <div class="signin">
         <form  th:action="@{/logincheck}" method="post">
             <input type="hidden" name="${_csrf.parameterName}" value="{_csrf.token}" />
-            <input type="text" name="username" class="user" value="rachelgreen" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'rachelgreen';}" />
-            <input type="password" name="password" class="pass" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" />
+            <input type="text" name="username" class="user" value="rachelgreen" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'admin';}" />
+            <input type="password" name="password" class="pass" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'admin';}" />
             <label>
                 <input type="checkbox" value="Remember-Me" /> Remember Me?
             </label>

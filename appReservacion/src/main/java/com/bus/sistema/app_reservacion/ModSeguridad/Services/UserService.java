@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.bus.sistema.app_reservacion.ModSeguridad.Domain.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import com.bus.sistema.app_reservacion.ModSeguridad.Domain.UserRole;
 import com.bus.sistema.app_reservacion.ModSeguridad.Repository.UserRepository;
 
 @Repository("userService")
@@ -26,12 +26,12 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         com.bus.sistema.app_reservacion.ModSeguridad.Domain.User user = UserRepository.findByUsername(username);
-        List<GrantedAuthority> autohorities = buildAuthorities(user.getUserRole());
+        List<GrantedAuthority> autohorities = buildAuthorities(user.getUserRolesByUsuarioId());
         return buildUser(user,autohorities);
     }
 
     private User buildUser(com.bus.sistema.app_reservacion.ModSeguridad.Domain.User user, List<GrantedAuthority> autohorities){
-        return new User(user.getUsername(),user.getPass(),user.isEnabled(),
+        return new User(user.getUsername(),user.getPassword(),user.isActivo(),
                 true,true,true,autohorities);
     }
 

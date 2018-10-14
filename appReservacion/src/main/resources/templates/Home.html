@@ -10,12 +10,7 @@
 
 <div th:fragment="content">
 
-
-    <h3>Usuario : <span th:text="${user}" ></span></h3>
-    <br/>
-    <br/>
-
-
+    <h1><span th:text="${menu}"></span></h1>
     <ul>
         <li>
             <a th:href="@{/empleado}">vista empleados</a>
@@ -23,8 +18,6 @@
         <li>
             <a th:href="@{/administrador}">Vista Administrador</a>
         </li>
-
-
 
         <li>
             <a th:href="@{/administrador}">Vista Consejo Facultad</a>
@@ -35,6 +28,11 @@
 
 
 
+    <tr th:each="menu : ${menus}">
+
+        <td th:text="${menu.denominacion}"></td>
+
+    </tr>
 
 
 

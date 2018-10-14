@@ -1,10 +1,8 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +19,7 @@ public class Persona {
     private Date fechaNacimiento;
     private String direccion;
     private String referencia;
+    private Collection<User> usersByPersonaId;
 
     @Id
     @Column(name = "PersonaId", nullable = false)
@@ -164,5 +163,14 @@ public class Persona {
     @Override
     public int hashCode() {
         return Objects.hash(personaId, nombres, paterno, materno, nombreCompleto, dni, celular, correo, sexo, fechaNacimiento, direccion, referencia);
+    }
+
+    @OneToMany(fetch =  FetchType.EAGER,mappedBy = "personaByPersonaId")
+    public Collection<User> getUsersByPersonaId() {
+        return usersByPersonaId;
+    }
+
+    public void setUsersByPersonaId(Collection<User> usersByPersonaId) {
+        this.usersByPersonaId = usersByPersonaId;
     }
 }

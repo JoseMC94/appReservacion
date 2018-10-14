@@ -1,31 +1,25 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
-
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
-//import org.springframework.security.core.GrantedAuthority;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 @Entity
-@Table(name ="user")
 public class User {
-    @Id
-    @Column(name = "username", unique = true,nullable = false,length = 45)
+    private int usuarioId;
+    private Integer personaId;
     private String username;
-    @Column(name = "password",nullable = false,length = 60)
-    private String pass;
-
-    @Column(name = "enabled",nullable = false)
-    private boolean enabled;
-
-    @OneToMany(fetch =  FetchType.EAGER, mappedBy = "user")
-    private Set<UserRole> userRole = new HashSet<UserRole>();
+    private String password;
+    private boolean activo;
+    private boolean indCambio;
+    private Integer cargoId;
+    private Integer oficinaId;
+    private Persona personaByPersonaId;
+    private Set<UserRole> userRolesByUsuarioId = new HashSet<>();
+    private Cargo cargoByCargoId;
+    private Oficina oficinaByOficinaId;
 
     public User(){
 
@@ -33,17 +27,39 @@ public class User {
 
     public User(String username, String pass, boolean enabled) {
         this.username = username;
-        this.pass = pass;
-        this.enabled = enabled;
+        this.password = pass;
+        this.activo = enabled;
     }
 
     public User(String username, String pass, boolean enabled, Set<UserRole> userRole) {
         this.username = username;
-        this.pass = pass;
-        this.enabled = enabled;
-        this.userRole = userRole;
+        this.password = pass;
+        this.activo = enabled;
+        this.userRolesByUsuarioId = userRole;
     }
 
+    @Id
+    @Column(name = "UsuarioId", nullable = false)
+    public int getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    @Basic
+    @Column(name = "PersonaId", nullable = true)
+    public Integer getPersonaId() {
+        return personaId;
+    }
+
+    public void setPersonaId(Integer personaId) {
+        this.personaId = personaId;
+    }
+
+    @Basic
+    @Column(name = "username", nullable = false, length = 60)
     public String getUsername() {
         return username;
     }
@@ -52,27 +68,112 @@ public class User {
         this.username = username;
     }
 
-    public String getPass() {
-        return pass;
+    @Basic
+    @Column(name = "password", nullable = false, length = 60)
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    @Basic
+    @Column(name = "Activo", nullable = false)
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
-    public Set<UserRole> getUserRole() {
-        return userRole;
+    @Basic
+    @Column(name = "IndCambio", nullable = false)
+    public boolean isIndCambio() {
+        return indCambio;
     }
 
-    public void setUserRole(Set<UserRole> userRole) {
-        this.userRole = userRole;
+    public void setIndCambio(boolean indCambio) {
+        this.indCambio = indCambio;
+    }
+
+    @Basic
+    @Column(name = "CargoId", nullable = true)
+    public Integer getCargoId() {
+        return cargoId;
+    }
+
+    public void setCargoId(Integer cargoId) {
+        this.cargoId = cargoId;
+    }
+
+    @Basic
+    @Column(name = "OficinaId", nullable = true)
+    public Integer getOficinaId() {
+        return oficinaId;
+    }
+
+    public void setOficinaId(Integer oficinaId) {
+        this.oficinaId = oficinaId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return usuarioId == user.usuarioId &&
+                activo == user.activo &&
+                indCambio == user.indCambio &&
+                Objects.equals(personaId, user.personaId) &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(cargoId, user.cargoId) &&
+                Objects.equals(oficinaId, user.oficinaId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(usuarioId, personaId, username, password, activo, indCambio, cargoId, oficinaId);
+    }
+
+    @ManyToOne(fetch =  FetchType.EAGER)
+    @JoinColumn(name = "PersonaId", referencedColumnName = "PersonaId",insertable=false, updatable=false)
+    public Persona getPersonaByPersonaId() {
+        return personaByPersonaId;
+    }
+
+    public void setPersonaByPersonaId(Persona personaByPersonaId) {
+        this.personaByPersonaId = personaByPersonaId;
+    }
+
+    @OneToMany(fetch =  FetchType.EAGER,mappedBy = "userByUsuarioId")
+    public Set<UserRole> getUserRolesByUsuarioId() {
+        return userRolesByUsuarioId;
+    }
+
+    public void setUserRolesByUsuarioId(Set<UserRole> userRolesByUsuarioId) {
+        this.userRolesByUsuarioId = userRolesByUsuarioId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "CargoId", referencedColumnName = "CargoId",insertable=false, updatable=false)
+    public Cargo getCargoByCargoId() {
+        return cargoByCargoId;
+    }
+
+    public void setCargoByCargoId(Cargo cargoByCargoId) {
+        this.cargoByCargoId = cargoByCargoId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "OficinaId", referencedColumnName = "OficinaId",insertable=false, updatable=false)
+    public Oficina getOficinaByOficinaId() {
+        return oficinaByOficinaId;
+    }
+
+    public void setOficinaByOficinaId(Oficina oficinaByOficinaId) {
+        this.oficinaByOficinaId = oficinaByOficinaId;
     }
 }

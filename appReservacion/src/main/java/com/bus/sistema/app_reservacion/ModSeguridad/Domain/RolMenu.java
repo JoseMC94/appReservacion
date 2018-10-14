@@ -9,6 +9,8 @@ public class RolMenu {
     private int id;
     private int rolId;
     private int menuId;
+    private Rol rolByRolId;
+    private Menu menuByMenuId;
 
     @Id
     @Column(name = "Id", nullable = false)
@@ -53,5 +55,25 @@ public class RolMenu {
     @Override
     public int hashCode() {
         return Objects.hash(id, rolId, menuId);
+    }
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "RolId", referencedColumnName = "RolId", nullable = false,insertable=false, updatable=false)
+    public Rol getRolByRolId() {
+        return rolByRolId;
+    }
+
+    public void setRolByRolId(Rol rolByRolId) {
+        this.rolByRolId = rolByRolId;
+    }
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "MenuId", referencedColumnName = "MenuId", nullable = false,insertable=false, updatable=false)
+    public Menu getMenuByMenuId() {
+        return menuByMenuId;
+    }
+
+    public void setMenuByMenuId(Menu menuByMenuId) {
+        this.menuByMenuId = menuByMenuId;
     }
 }

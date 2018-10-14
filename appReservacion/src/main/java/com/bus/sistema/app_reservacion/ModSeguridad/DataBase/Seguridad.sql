@@ -130,7 +130,7 @@ INSERT INTO rol_menu(MenuId,RolId) VALUES (41, 1);
 INSERT INTO rol_menu(MenuId,RolId) VALUES (20, 3);
 INSERT INTO rol_menu(MenuId,RolId) VALUES (22, 3);
 
-
+/*
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `username` varchar(45) NOT NULL,
@@ -140,8 +140,8 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-INSERT INTO user(username,enabled,password) VALUES ('admin',1,'$10$Pb1181xqfYocYMV7zjIS3e3h9VDMhYrg10tQ0zMpwv5VQNqbjQw22');
-INSERT INTO user(username,enabled,password) VALUES ('user',1,'$10$Pb1181xqfYocYMV7zjIS3e3h9VDMhYrg10tQ0zMpwv5VQNqbjQw22');
+INSERT INTO user(username,enabled,password) VALUES ('admin',1,'$2a$10$Bs6brtlLYJULigF57keOaOiMotCfCDlfYic3FxYZLSESopEmtL.c2');
+INSERT INTO user(username,enabled,password) VALUES ('user',1,'$$2a$10$2uTgaREu0gAEIJooAkVG8ep5ByPRbOPPNhNVek7n3QqgUG3T7TTJG');
 
 DROP TABLE IF EXISTS user_role;
 CREATE TABLE `user_role` (
@@ -156,3 +156,74 @@ CREATE TABLE `user_role` (
 
 INSERT  INTO user_role(user_role,role,username)VALUES(1,'ROLE_ADMIN','admin');
 INSERT  INTO user_role(user_role,role,username)VALUES(2,'ROLE_USER','user')
+*/
+
+DROP TABLE IF EXISTS `user`;
+create table `user`(
+	UsuarioId int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	PersonaId int(11) NULL,
+	username varchar(60) NOT NULL,
+	password varchar(60) NOT NULL,
+	Activo bit(1) NOT NULL DEFAULT b'1',
+    IndCambio bit(1) NOT NULL DEFAULT b'1',
+	FOREIGN KEY(PersonaId) REFERENCES Persona(PersonaId) on DELETE no action on UPDATE CASCADE,
+    CargoId int(11) ,
+    FOREIGN KEY(CargoId) REFERENCES Cargo(CargoId) on DELETE no action on UPDATE CASCADE,
+    OficinaId int(11) ,
+    FOREIGN KEY(OficinaId) REFERENCES Oficina(OficinaId) on DELETE no action on UPDATE CASCADE
+);
+INSERT INTO `user` VALUES ('1', '1', 'admin', '$2a$10$Bs6brtlLYJULigF57keOaOiMotCfCDlfYic3FxYZLSESopEmtL.c2', 1, 0,1,2);
+
+
+DROP TABLE IF EXISTS user_role;
+CREATE TABLE `user_role` (
+Id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	UsuarioId int(11) NOT NULL ,
+  FOREIGN KEY(UsuarioId) REFERENCES `user`(UsuarioId) on DELETE no action on UPDATE CASCADE,
+	RolId INT(11) NOT NULL ,
+  FOREIGN KEY(RolId) REFERENCES Rol(RolId) on DELETE no action on UPDATE CASCADE,
+  `user_role` int(11) NOT NULL ,
+  `role` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL
+);
+INSERT INTO user_role VALUES (1,1,1,1,'ROLE_ADMIN','admin');
+
+
+
+
+
+
+SET FOREIGN_KEY_CHECKS=0;
+
+DROP TABLE IF EXISTS Oficina;
+Create table Oficina(
+	OficinaId int(11) PRIMARY KEY auto_increment not NULL,
+	Denominacion VARCHAR(255) not NULL
+);
+INSERT INTO `oficina` VALUES ('1', 'DIRECCION EJECUTIVA');
+INSERT INTO `oficina` VALUES ('2', 'ADMINISTRACION');
+INSERT INTO `oficina` VALUES ('3', 'ABASTECIMIENTO');
+INSERT INTO `oficina` VALUES ('4', 'ALMACEN');
+INSERT INTO `oficina` VALUES ('5', 'PERSONAL');
+
+
+DROP TABLE IF EXISTS usuario_oficina;
+/*CREATE TABLE usuario_oficina (
+  OficinaId int(11) NOT NULL,
+		FOREIGN KEY(OficinaId) REFERENCES Oficina(OficinaId) on DELETE no action on UPDATE CASCADE,
+  UsuarioId int(11) NOT NULL,
+		FOREIGN KEY(UsuarioId) REFERENCES Usuario(UsuarioId) on DELETE no action on UPDATE CASCADE,
+  PRIMARY KEY (`UsuarioId`,`OficinaId`)
+);
+INSERT INTO `usuario_oficina` VALUES ('1', '1');
+*/
+DROP TABLE IF EXISTS Cargo;
+Create table Cargo(
+	CargoId int(11) PRIMARY KEY auto_increment not NULL,
+	Denominacion VARCHAR(255) not NULL
+);
+INSERT INTO `Cargo` VALUES ('1', 'DIRECTOR EJECUTIVO');
+INSERT INTO `Cargo` VALUES ('2', 'ADMINISTRADOR');
+INSERT INTO `Cargo` VALUES ('3', 'JEFE ABASTECIMIENTO');
+INSERT INTO `Cargo` VALUES ('4', 'JEFE ALMACEN');
+INSERT INTO `Cargo` VALUES ('5', 'JEFE PERSONAL');

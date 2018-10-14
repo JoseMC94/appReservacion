@@ -1,15 +1,15 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Rol {
     private int rolId;
     private String denominacion;
+    private Collection<RolMenu> rolMenusByRolId;
+    private Collection<UserRole> userRolesByRolId;
 
     @Id
     @Column(name = "RolId", nullable = false)
@@ -43,5 +43,23 @@ public class Rol {
     @Override
     public int hashCode() {
         return Objects.hash(rolId, denominacion);
+    }
+
+    @OneToMany(mappedBy = "rolByRolId")
+    public Collection<RolMenu> getRolMenusByRolId() {
+        return rolMenusByRolId;
+    }
+
+    public void setRolMenusByRolId(Collection<RolMenu> rolMenusByRolId) {
+        this.rolMenusByRolId = rolMenusByRolId;
+    }
+
+    @OneToMany(mappedBy = "rolByRolId")
+    public Collection<UserRole> getUserRolesByRolId() {
+        return userRolesByRolId;
+    }
+
+    public void setUserRolesByRolId(Collection<UserRole> userRolesByRolId) {
+        this.userRolesByRolId = userRolesByRolId;
     }
 }

@@ -1,9 +1,7 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +12,7 @@ public class Menu {
     private String icono;
     private Boolean indPadre;
     private Integer referencia;
+    private Collection<RolMenu> rolMenusByMenuId;
 
     @Id
     @Column(name = "MenuId", nullable = false)
@@ -91,5 +90,14 @@ public class Menu {
     @Override
     public int hashCode() {
         return Objects.hash(menuId, denominacion, modulo, icono, indPadre, referencia);
+    }
+
+    @OneToMany(mappedBy = "menuByMenuId")
+    public Collection<RolMenu> getRolMenusByMenuId() {
+        return rolMenusByMenuId;
+    }
+
+    public void setRolMenusByMenuId(Collection<RolMenu> rolMenusByMenuId) {
+        this.rolMenusByMenuId = rolMenusByMenuId;
     }
 }

@@ -6,16 +6,15 @@
   <session-factory>
     <property name="connection.url">jdbc:mysql://localhost:3306/reservacion?useSSL=false</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Menu"/>
+      <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Menu"/>
       <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Persona"/>
       <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Rol"/>
       <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.RolMenu"/>
       <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.User"/>
       <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.UserRole"/>
-      <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Usuario"/>
-      <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.UsuarioRol"/>
-    <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.HibernateSequence"/>
-    <!-- <property name="connection.username"/> -->
+      <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Cargo"/>
+      <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Oficina"/>
+      <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 
     <!-- DB schema will be updated if needed -->
