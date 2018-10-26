@@ -1,19 +1,22 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Config;
 
+import com.bus.sistema.app_reservacion.ModSeguridad.Controller.HomeController;
+import com.bus.sistema.app_reservacion.ModSeguridad.Controller.LoginController;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import com.bus.sistema.app_reservacion.ModSeguridad.Controller.LoginController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ThymeleafLayoutInterceptor  extends HandlerInterceptorAdapter{
+public class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter {
     private static final String DEFAULT_LAYOUT = "layouts/layout";
     private static final String DEFAULT_VIEW_ATTRIBUTE_NAME = "view";
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+
         if (modelAndView == null || !modelAndView.hasView()) {
             return;
         }
@@ -24,6 +27,7 @@ public class ThymeleafLayoutInterceptor  extends HandlerInterceptorAdapter{
         String layoutName = getLayoutName(handler);
         modelAndView.setViewName(layoutName);
         modelAndView.addObject(DEFAULT_VIEW_ATTRIBUTE_NAME, originalViewName);
+
     }
 
     private boolean isRedirectOrForward(String viewName) {

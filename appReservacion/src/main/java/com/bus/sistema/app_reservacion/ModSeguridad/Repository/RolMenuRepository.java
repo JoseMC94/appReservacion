@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository("rolMenuRepository")
 public interface RolMenuRepository extends JpaRepository<RolMenu, Serializable> {
-    public abstract List<Menu> findAllByRolId(int id);
+    public abstract List<RolMenu> findAllByRolId(int id);
 }

@@ -1,46 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <title>Title</title>
+
 </head>
 <body>
 
 
-
 <div th:fragment="content">
+<!--
 
-    <h1><span th:text="${menu}"></span></h1>
-    <ul>
-        <li>
-            <a th:href="@{/empleado}">vista empleados</a>
+    <ul th:each="menu : ${menus}">
+        <li th:if="${menu.indPadre}">
+            <span th:text="${menu.denominacion}"></span>
+            <ul  th:each="menu2 : ${menus2}" th:if="${menu2.referencia == menu.menuId}">
+                <li  th:text="${menu2.denominacion}">
+                </li>
+            </ul>
+
         </li>
-        <li>
-            <a th:href="@{/administrador}">Vista Administrador</a>
-        </li>
-
-        <li>
-            <a th:href="@{/administrador}">Vista Consejo Facultad</a>
-        </li>
-    </ul>
-    <br/>
-    <br/>
-
-
-
-    <tr th:each="menu : ${menus}">
-
-        <td th:text="${menu.denominacion}"></td>
-
-    </tr>
-
-
-
-    <form th:action="@{/logout}" method="post">
-        <button class="btn  btn-primary btn-block" type="submit">SALIR</button>
-    </form>
+    </ul>-->
 </div>
-
 
 
 </body>

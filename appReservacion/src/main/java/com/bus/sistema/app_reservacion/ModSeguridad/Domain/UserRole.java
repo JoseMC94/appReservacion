@@ -1,5 +1,7 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
+import groovy.transform.ToString;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -94,7 +96,7 @@ public class UserRole {
     }
 
     @ManyToOne
-    @JoinColumn(name = "UsuarioId", referencedColumnName = "UsuarioId", nullable = false,insertable=false, updatable=false)
+    @JoinColumn(name = "UsuarioId", referencedColumnName = "UsuarioId", nullable = false, insertable = false, updatable = false)
     public User getUserByUsuarioId() {
         return userByUsuarioId;
     }
@@ -104,19 +106,25 @@ public class UserRole {
     }
 
 
-
-
-
-
-
-
     @ManyToOne
-    @JoinColumn(name = "RolId", referencedColumnName = "RolId", nullable = false,insertable=false, updatable=false)
+    @JoinColumn(name = "RolId", referencedColumnName = "RolId", nullable = false, insertable = false, updatable = false)
     public Rol getRolByRolId() {
         return rolByRolId;
     }
 
     public void setRolByRolId(Rol rolByRolId) {
         this.rolByRolId = rolByRolId;
+    }
+
+
+    @Override
+    public String toString() {
+        String a = "\nid: " +id+
+                "\nusuarioId: " +usuarioId+
+                "\nrolId: " +rolId+
+                "\nuserRole: " +userRole+
+                "\nrole: " +role+
+                "\nusername: "+username;
+        return a;
     }
 }

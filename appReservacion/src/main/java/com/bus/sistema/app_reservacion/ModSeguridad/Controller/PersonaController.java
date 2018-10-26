@@ -18,9 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequestMapping("/Home")
+@RequestMapping("/Persona")
 @Controller
-public class HomeController {
+public class PersonaController {
 
     @Autowired
     @Qualifier("rolMenuRepository")
@@ -44,13 +44,16 @@ public class HomeController {
     }
 
     @GetMapping("/")
+    public ModelAndView persona() {
+        return home1();
+    }
+    @GetMapping("/Persona")
     public ModelAndView index() {
         return home1();
     }
-
     @GetMapping("/home")
     public ModelAndView home1() {
-        ModelAndView model = new ModelAndView("Home");
+        ModelAndView model = new ModelAndView("/modSeguridadView/Persona");
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addObject("menu", userService.findOne(user.getUsername()).getPersonaByPersonaId().getNombreCompleto());
         List<RolMenu> listRolMenu = rolMenuRepository.findAllByRolId(userRolRepository.findByUsuarioId(userService.findOne(user.getUsername()).getUsuarioId()).getRolId());
