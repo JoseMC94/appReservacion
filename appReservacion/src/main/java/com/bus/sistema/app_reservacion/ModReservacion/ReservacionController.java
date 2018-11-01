@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ReservacionController {
 
-    @GetMapping("/Pasaje")
+    @GetMapping(value = {"/home", "/", "/index", "/Pasaje"})
     public ModelAndView index() {
         ModelAndView model = new ModelAndView("/modreservacionView/index");
         return model;
