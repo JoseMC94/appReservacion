@@ -1,6 +1,5 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Repository;
 
-import com.bus.sistema.app_reservacion.ModSeguridad.Domain.Menu;
 import com.bus.sistema.app_reservacion.ModSeguridad.Domain.RolMenu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

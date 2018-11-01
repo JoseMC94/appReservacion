@@ -3,7 +3,6 @@ package com.bus.sistema.app_reservacion.ModSeguridad.Services;
 import com.bus.sistema.app_reservacion.ModSeguridad.Domain.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserServiceE {
     public abstract List<User> listAllUsers();

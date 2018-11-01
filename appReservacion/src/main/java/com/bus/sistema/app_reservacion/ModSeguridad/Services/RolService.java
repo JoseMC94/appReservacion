@@ -1,6 +1,5 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Services;
 
-import com.bus.sistema.app_reservacion.ModSeguridad.Domain.Menu;
 import com.bus.sistema.app_reservacion.ModSeguridad.Domain.Rol;
 
 import java.util.List;

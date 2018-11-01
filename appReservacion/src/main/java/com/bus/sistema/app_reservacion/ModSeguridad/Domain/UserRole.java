@@ -1,7 +1,5 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
-import groovy.transform.ToString;
-
 import javax.persistence.*;
 import java.util.Objects;
 

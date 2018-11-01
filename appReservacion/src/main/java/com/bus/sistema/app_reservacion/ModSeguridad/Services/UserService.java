@@ -1,10 +1,7 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Services;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import com.bus.sistema.app_reservacion.ModSeguridad.Domain.UserRole;
+import com.bus.sistema.app_reservacion.ModSeguridad.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,7 +12,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import com.bus.sistema.app_reservacion.ModSeguridad.Repository.UserRepository;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Repository("userService")
 public class UserService implements UserDetailsService {
