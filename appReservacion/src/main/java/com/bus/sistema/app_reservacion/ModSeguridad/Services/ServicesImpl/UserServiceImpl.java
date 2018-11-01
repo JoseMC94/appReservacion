@@ -45,4 +45,9 @@ public class UserServiceImpl implements UserServiceE {
     public User saveUser(User encargado) {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "user implement";
+    }
 }

@@ -22,39 +22,9 @@ import java.util.List;
 @Controller
 public class ReservacionController {
 
-    @Autowired
-    @Qualifier("rolMenuRepository")
-    private RolMenuRepository rolMenuRepository;
-
-    @Autowired
-    @Qualifier("userServiceEImpl")
-    private UserServiceE userService;
-
-    @Autowired
-    @Qualifier("userRolRepository")
-    private UserRolRepository userRolRepository;
-
-    @Autowired
-    @Qualifier("menuRepository")
-    private MenuRepository menuRepository;
-
     @GetMapping("/Pasaje")
     public ModelAndView index() {
         ModelAndView model = new ModelAndView("/modreservacionView/index");
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addObject("menu", userService.findOne(user.getUsername()).getPersonaByPersonaId().getNombreCompleto());
-        List<RolMenu> listRolMenu = rolMenuRepository.findAllByRolId(userRolRepository.findByUsuarioId(userService.findOne(user.getUsername()).getUsuarioId()).getRolId());
-        List<Menu> listMenu = menuRepository.findAll();
-        ArrayList<Menu> listaMenuUsuario = new ArrayList<>();
-        for (RolMenu rolMenu : listRolMenu) {
-            for (Menu menu : listMenu) {
-                if (rolMenu.getMenuId() == menu.getMenuId()) {
-                    listaMenuUsuario.add(menu);
-                }
-            }
-        }
-        model.addObject("menus", listMenu);
-        model.addObject("menus2", listMenu);
         return model;
     }
 }

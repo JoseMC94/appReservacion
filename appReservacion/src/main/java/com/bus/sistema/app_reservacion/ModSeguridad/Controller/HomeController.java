@@ -22,22 +22,6 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    @Autowired
-    @Qualifier("rolMenuRepository")
-    private RolMenuRepository rolMenuRepository;
-
-    @Autowired
-    @Qualifier("userServiceEImpl")
-    private UserServiceE userService;
-
-    @Autowired
-    @Qualifier("userRolRepository")
-    private UserRolRepository userRolRepository;
-
-    @Autowired
-    @Qualifier("menuRepository")
-    private MenuRepository menuRepository;
-
     @GetMapping("/index")
     public ModelAndView home() {
         return home1();
@@ -51,20 +35,6 @@ public class HomeController {
     @GetMapping("/home")
     public ModelAndView home1() {
         ModelAndView model = new ModelAndView("Home");
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addObject("menu", userService.findOne(user.getUsername()).getPersonaByPersonaId().getNombreCompleto());
-        List<RolMenu> listRolMenu = rolMenuRepository.findAllByRolId(userRolRepository.findByUsuarioId(userService.findOne(user.getUsername()).getUsuarioId()).getRolId());
-        List<Menu> listMenu = menuRepository.findAll();
-        ArrayList<Menu> listaMenuUsuario = new ArrayList<>();
-        for (RolMenu rolMenu : listRolMenu) {
-            for (Menu menu : listMenu) {
-                if (rolMenu.getMenuId() == menu.getMenuId()) {
-                    listaMenuUsuario.add(menu);
-                }
-            }
-        }
-        model.addObject("menus", listMenu);
-        model.addObject("menus2", listMenu);
         return model;
     }
 
