@@ -14,10 +14,7 @@ public class AppReservacionApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AppReservacionApplication.class, args);
-
         System.out.println("\n\nApplication started http://localhost:8080/appReservacion/Home/home ... launching browser now");
-
-
         Browse("http://localhost:8080/appReservacion/Home/home");
     }
 

@@ -10,11 +10,16 @@
 
     <title>.: SISTEMA :.</title>
 
+    <!-- jQuery -->
+    <script type="text/javascript" th:src="@{/js/vendors/jquery/dist/jquery.min.js}"></script>
+
     <!-- Bootstrap -->
     <link th:href="@{/css/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet"></link>
     <!-- Font Awesome -->
     <link th:href="@{/css/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet"></link>
     <!-- NProgress -->
+
+
     <link th:href="@{/css/vendors/nprogress/nprogress.css}" rel="stylesheet"></link>
     <!-- iCheck -->
     <link th:href="@{/css/vendors/iCheck/skins/flat/green.css}" rel="stylesheet"></link>
@@ -25,13 +30,17 @@
     <link th:href="@{/css/vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"></link>
     <!-- bootstrap-daterangepicker -->
     <link th:href="@{/css/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet"></link>
-    <!-- Custom Theme Style -->
+        <!-- Custom Theme Style -->
     <link th:href="@{/css/build/css/custom.min.css}" rel="stylesheet"></link>
     <link th:href="@{/css/main.css}" rel="stylesheet"></link>
+    <!-- Full Calenddar -->
+    <link th:href="@{/css/fullcalendar.min.css}" rel="stylesheet"></link>
+    <link th:href="@{/css/fullcalendar.print.css}" rel="stylesheet"></link>
+
+
 </head>
 
 <body class="nav-md">
-<h1><span th:text="${usuario}"></span></h1>
 <div class="container body">
     <div class="main_container">
         <div class="col-md-3 left_col">
@@ -45,7 +54,7 @@
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                     <div class="profile_pic">
-                        <img th:src="@{../images/img.jpg}" alt="..." class="img-circle profile_img"/>
+                        <img th:src="@{/images/img.jpg}" alt="..." class="img-circle profile_img"/>
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
@@ -117,7 +126,7 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img th:src="@{../images/img.jpg}" alt=""></img>John Doe
+                                <img th:src="@{/images/img.jpg}" alt=""></img>John Doe
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -142,7 +151,7 @@
                             <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                 <li>
                                     <a>
-                                        <span class="image"><img th:src="@{../images/img.jpg}"
+                                        <span class="image"><img th:src="@{/images/img.jpg}"
                                                                  alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
@@ -155,7 +164,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img th:src="@{../images/img.jpg}"
+                                        <span class="image"><img th:src="@{/images/img.jpg}"
                                                                  alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
@@ -168,7 +177,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img th:src="@{../images/img.jpg}"
+                                        <span class="image"><img th:src="@{/images/img.jpg}"
                                                                  alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
@@ -181,7 +190,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img th:src="@{../images/img.jpg}"
+                                        <span class="image"><img th:src="@{/images/img.jpg}"
                                                                  alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
@@ -230,9 +239,6 @@
         <!--footer content -->
     </div>
 </div>
-
-<!-- jQuery -->
-<script type="text/javascript" th:src="@{/js/vendors/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap -->
 <script type="text/javascript" th:src="@{/js/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
 <!-- FastClick -->
@@ -265,10 +271,21 @@
 <script type="text/javascript" th:src="@{/js/vendors/jqvmap/dist/jquery.vmap.js}"></script>
 <script type="text/javascript" th:src="@{/js/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
 <script type="text/javascript" th:src="@{/js/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
-<!-- bootstrap-daterangepicker -->
-<script type="text/javascript" th:src="@{/js/vendors/moment/min/moment.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+<!-- bootstrap-daterangepicker
+<script type="text/javascript" th:src="@{/js/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>-->
 <!-- Custom Theme Scripts -->
-<script type="text/javascript" th:src="@{/js/build/js/custom.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/build/js/custom.js}"></script>
+<!--
+<script type="text/javascript" th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+-->
+
+<!-- FullCalendar -->
+<script type="text/javascript" th:src="@{/js/vendors/moment/min/moment.min.js}"></script>
+<script  th:src="@{/js/fullcalendar.min.js}"></script>
+
+<!-- Ajax -->
+<script  th:src="@{/js/ajax/jquery.form.js}"></script>
+<script  th:src="@{/js/ajax/jquery.validator.js}"></script>
+<script  th:src="@{/js/ajax/ini.js}"></script>
 </body>
 </html>

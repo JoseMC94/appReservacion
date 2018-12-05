@@ -65,12 +65,12 @@ CREATE TABLE menu (
   Referencia int(11) DEFAULT NULL
 );
 INSERT INTO menu VALUES (1, 'Mantenimientos', 'Oficina', 'mdi-action-settings', 1, null);
-INSERT INTO menu VALUES (2, 'Persona', 'Persona', 			null, 0, 1);
+INSERT INTO menu VALUES (2, 'PersonaRepository', 'PersonaRepository', 			null, 0, 1);
 INSERT INTO menu VALUES (3, 'Mantenimiento', 'Mantenimiento',null, 0, 1);
 INSERT INTO menu VALUES (4, 'Articulo', 'Articulo', 			null, 0, 1);
 
-INSERT INTO menu VALUES (10, 'Seguridad', 'Usuario','mdi-hardware-security', 1, null);
-INSERT INTO menu VALUES (11, 'Usuarios', 'Usuario', 	null,0, 10);
+INSERT INTO menu VALUES (10, 'Seguridad', 'UsuarioController','mdi-hardware-security', 1, null);
+INSERT INTO menu VALUES (11, 'Usuarios', 'UsuarioController', 	null,0, 10);
 INSERT INTO menu VALUES (12, 'Roles', 'Rol', 			null,0, 10);
 
 INSERT INTO menu VALUES (20, 'Clinica', 'Citas', 'mdi-action-book', 1, null);
@@ -212,7 +212,7 @@ DROP TABLE IF EXISTS usuario_oficina;
   OficinaId int(11) NOT NULL,
 		FOREIGN KEY(OficinaId) REFERENCES Oficina(OficinaId) on DELETE no action on UPDATE CASCADE,
   UsuarioId int(11) NOT NULL,
-		FOREIGN KEY(UsuarioId) REFERENCES Usuario(UsuarioId) on DELETE no action on UPDATE CASCADE,
+		FOREIGN KEY(UsuarioId) REFERENCES UsuarioController(UsuarioId) on DELETE no action on UPDATE CASCADE,
   PRIMARY KEY (`UsuarioId`,`OficinaId`)
 );
 INSERT INTO `usuario_oficina` VALUES ('1', '1');

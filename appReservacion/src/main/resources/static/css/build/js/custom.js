@@ -2461,12 +2461,12 @@ if (typeof NProgress != 'undefined') {
 					start: new Date(y, m, d, 10, 30),
 					allDay: false
 				  }, {
-					title: 'Lunch',
+					title: 'Vilcashuaman',
 					start: new Date(y, m, d + 14, 12, 0),
 					end: new Date(y, m, d, 14, 0),
 					allDay: false
 				  }, {
-					title: 'Birthday Party',
+					title: 'salida a vinchos',
 					start: new Date(y, m, d + 1, 19, 0),
 					end: new Date(y, m, d + 1, 22, 30),
 					allDay: false

@@ -173,4 +173,8 @@ public class Persona {
     public void setUsersByPersonaId(Collection<User> usersByPersonaId) {
         this.usersByPersonaId = usersByPersonaId;
     }
+
+public String fechaConvert(){
+        return this.fechaNacimiento.toString();
+}
 }
