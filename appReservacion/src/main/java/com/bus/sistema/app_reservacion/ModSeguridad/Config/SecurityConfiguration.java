@@ -17,6 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    //  Me odio por ser un idiota  :(
+
     @Autowired
     @Qualifier("userService")
     private UserDetailsService userService;
