@@ -31,8 +31,8 @@
             </div>
 
             <ul class="list-unstyled top_profiles scroll-view">
-                <div th:each="persona : ${listaPersonas}">
-                    <li class="media event">
+
+                    <li th:each="persona : ${listaPersonas}" class="media event">
                         <a class="pull-left border-aero profile_thumb">
                             <i class="fa fa-user aero"></i>
                         </a>
@@ -44,7 +44,6 @@
                             </p>
                         </div>
                     </li>
-                </div>
             </ul>
         </div>
     </div>

@@ -50,18 +50,15 @@ DROP TABLE IF EXISTS Pasaje;
 Create table Pasaje(
 	PasajeId int(11) PRIMARY KEY auto_increment not NULL,
 	FechaPasaje date not null,
-	ClienteId INT(11) NOT NULL,
-	FOREIGN KEY(ClienteId) REFERENCES Cliente(ClienteId) on DELETE no action on UPDATE CASCADE,
+	PersonaId INT(11) NOT NULL,
+	FOREIGN KEY(PersonaId) REFERENCES Persona(PersonaId) on DELETE no action on UPDATE CASCADE,
 	UsuarioId INT(11) NOT NULL,
 	FOREIGN KEY(UsuarioId) REFERENCES User(UsuarioId) on DELETE no action on UPDATE CASCADE,
 	SalidaId INT(11) NOT NULL,
 	FOREIGN KEY(SalidaId) REFERENCES Salida(SalidaId) on DELETE no action on UPDATE CASCADE,
 	Abono decimal(5,2) not NULL,
 	Saldo decimal(5,2) not NULL,
-	TipoVenta VARCHAR(255) not null,
-  NumeroAsiento int (3) not null,
-	VehiculoId int(11),
-  FOREIGN KEY(VehiculoId) REFERENCES Vehiculo(VehiculoId) on DELETE no action on UPDATE CASCADE
+  NumeroAsiento int (3) not null
 );
 
 INSERT INTO menu VALUES (60, 'Reservacion', 'Reservacion', 'fa fa-taxi', 1, null);
@@ -74,3 +71,41 @@ INSERT INTO rol_menu(MenuId,RolId) VALUES (60, 1);
 INSERT INTO rol_menu(MenuId,RolId) VALUES (61, 1);
 INSERT INTO rol_menu(MenuId,RolId) VALUES (63, 1);
 INSERT INTO rol_menu(MenuId,RolId) VALUES (64, 1);
+
+
+-- tablas endoces
+
+DROP TABLE IF EXISTS Endoce;
+Create table Endoce(
+	EndoceId int(11) PRIMARY KEY auto_increment not NULL,
+	Denominacion VARCHAR(255) not NULL,
+	Descripcion VARCHAR(255) not NULL
+);
+
+DROP TABLE IF EXISTS EndoceDetalle;
+Create table EndoceDetalle(
+	EndoceDetalleId int(11) PRIMARY KEY auto_increment not NULL,
+	EndoceId INT(11) NOT NULL,
+	FOREIGN KEY(EndoceId) REFERENCES Endoce(EndoceId) on DELETE no action on UPDATE CASCADE,
+	PersonaId INT(11) NOT NULL,
+	FOREIGN KEY(PersonaId) REFERENCES Persona(PersonaId) on DELETE no action on UPDATE CASCADE,
+	Estado VARCHAR(255) not NULL,
+	FechaPasaje date not null
+);
+
+
+DROP TABLE IF EXISTS SalidaDiaria;
+Create table EntradaDiaria(
+	EntradaId int(11) PRIMARY KEY auto_increment not NULL,
+	Denominacion  VARCHAR(255)  NULL,
+	Valor decimal (6,2) null ,
+	FechaEntrada date not null
+);
+
+DROP TABLE IF EXISTS SalidaDiaria;
+Create table SalidaDiaria(
+	SalidaId int(11) PRIMARY KEY auto_increment not NULL,
+	Denominacion  VARCHAR(255)  NULL,
+	Valor decimal (6,2) null ,
+	FechaSalida date not null
+);

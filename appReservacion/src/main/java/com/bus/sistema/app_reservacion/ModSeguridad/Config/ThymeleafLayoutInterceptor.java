@@ -51,7 +51,7 @@ public class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter {
             listRolMenu.forEach(rolMenu -> listMenu.stream().filter(menu -> rolMenu.getMenuId() == menu.getMenuId()).forEach(listaMenuUsuario::add));
             modelAndView.addObject("menus", listMenu);
             modelAndView.addObject("menus2", listMenu);
-            //model.addObject("menu", userService.findOne(user.getUsername()).getPersonaByPersonaId().getNombreCompleto());
+            modelAndView.addObject("usuarioConectado", userService.findOne(user.getUsername()).getPersonaByPersonaId().getNombres()+" "+userService.findOne(user.getUsername()).getPersonaByPersonaId().getPaterno());
         }
 
 

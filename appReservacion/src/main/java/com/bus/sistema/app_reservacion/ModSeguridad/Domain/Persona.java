@@ -1,5 +1,9 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
+import com.bus.sistema.app_reservacion.ModReservacion.Domain.Endocedetalle;
+import com.bus.sistema.app_reservacion.ModReservacion.Domain.Pasaje;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
@@ -19,7 +23,12 @@ public class Persona {
     private Date fechaNacimiento;
     private String direccion;
     private String referencia;
+    @JsonIgnore
     private Collection<User> usersByPersonaId;
+    @JsonIgnore
+    private Collection<Endocedetalle> endocedetallesByPersonaId;
+    @JsonIgnore
+    private Collection<Pasaje> pasajesByPersonaId;
 
     @Id
     @Column(name = "PersonaId", nullable = false)
@@ -165,7 +174,7 @@ public class Persona {
         return Objects.hash(personaId, nombres, paterno, materno, nombreCompleto, dni, celular, correo, sexo, fechaNacimiento, direccion, referencia);
     }
 
-    @OneToMany(fetch =  FetchType.EAGER,mappedBy = "personaByPersonaId")
+    @OneToMany(mappedBy = "personaByPersonaId")
     public Collection<User> getUsersByPersonaId() {
         return usersByPersonaId;
     }
@@ -174,7 +183,26 @@ public class Persona {
         this.usersByPersonaId = usersByPersonaId;
     }
 
-public String fechaConvert(){
+    public String fechaConvert() {
         return this.fechaNacimiento.toString();
-}
+    }
+
+    @OneToMany(mappedBy = "personaByPersonaId")
+    public Collection<Endocedetalle> getEndocedetallesByPersonaId() {
+        return endocedetallesByPersonaId;
+    }
+
+    public void setEndocedetallesByPersonaId(Collection<Endocedetalle> endocedetallesByPersonaId) {
+        this.endocedetallesByPersonaId = endocedetallesByPersonaId;
+    }
+
+    @OneToMany(mappedBy = "personaByPersonaId")
+    public Collection<Pasaje> getPasajesByPersonaId() {
+        return pasajesByPersonaId;
+    }
+
+    public void setPasajesByPersonaId(Collection<Pasaje> pasajesByPersonaId) {
+        this.pasajesByPersonaId = pasajesByPersonaId;
+    }
+
 }

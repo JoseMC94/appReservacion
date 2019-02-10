@@ -5,7 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @Repository("personaRepository")
 public interface PersonaRepository extends JpaRepository<Persona, Serializable> {
+    public abstract Persona findPersonaByDni(String id);
+
 }

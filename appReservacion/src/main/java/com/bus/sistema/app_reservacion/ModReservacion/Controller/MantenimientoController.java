@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@RequestMapping("/MantenimientoReservacion")
+
+@RequestMapping("/MantenimientoReservaon")
 @Controller
 public class MantenimientoController {
     @GetMapping(value = {"/home", "/", "/index", "/Mantenimiento"})
@@ -13,4 +14,5 @@ public class MantenimientoController {
         ModelAndView model = new ModelAndView("/modreservacionView/Mantenimiento/index");
         return model;
     }
+
 }

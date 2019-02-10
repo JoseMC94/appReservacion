@@ -1,6 +1,9 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
+import com.bus.sistema.app_reservacion.ModReservacion.Domain.Pasaje;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -19,15 +22,19 @@ public class User {
     private Set<UserRole> userRolesByUsuarioId = new HashSet<>();
     private Cargo cargoByCargoId;
     private Oficina oficinaByOficinaId;
+    private Collection<Pasaje> pasajesByUsuarioId;
 
-    public User(){
-
+    public User(int usuarioId){
+         if (usuarioId==0)this.personaByPersonaId=new Persona();
     }
 
     public User(String username, String pass, boolean enabled) {
         this.username = username;
         this.password = pass;
         this.activo = enabled;
+    }
+    public User(){
+
     }
 
     public User(String username, String pass, boolean enabled, Set<UserRole> userRole) {
@@ -175,4 +182,14 @@ public class User {
     public void setOficinaByOficinaId(Oficina oficinaByOficinaId) {
         this.oficinaByOficinaId = oficinaByOficinaId;
     }
+
+    @OneToMany(mappedBy = "userByUsuarioId")
+    public Collection<Pasaje> getPasajesByUsuarioId() {
+        return pasajesByUsuarioId;
+    }
+
+    public void setPasajesByUsuarioId(Collection<Pasaje> pasajesByUsuarioId) {
+        this.pasajesByUsuarioId = pasajesByUsuarioId;
+    }
+
 }

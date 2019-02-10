@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("menuServiceImpl")
@@ -39,5 +40,9 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Menu save(Menu encargado) {
         return null;
+    }
+
+    public void guardarLista(ArrayList<Menu> listMenu){
+        menuJpaRepository.save(listMenu);
     }
 }

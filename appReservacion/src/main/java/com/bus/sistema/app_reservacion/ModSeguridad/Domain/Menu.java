@@ -1,5 +1,7 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -12,6 +14,7 @@ public class Menu {
     private String icono;
     private Boolean indPadre;
     private Integer referencia;
+    @JsonIgnore
     private Collection<RolMenu> rolMenusByMenuId;
 
     @Id
@@ -92,7 +95,8 @@ public class Menu {
         return Objects.hash(menuId, denominacion, modulo, icono, indPadre, referencia);
     }
 
-    @OneToMany(mappedBy = "menuByMenuId")
+
+    @OneToMany(fetch =FetchType.EAGER, mappedBy = "menuByMenuId")
     public Collection<RolMenu> getRolMenusByMenuId() {
         return rolMenusByMenuId;
     }

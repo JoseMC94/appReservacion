@@ -1,5 +1,7 @@
 package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -9,7 +11,9 @@ public class RolMenu {
     private int id;
     private int rolId;
     private int menuId;
+    @JsonIgnore
     private Rol rolByRolId;
+    @JsonIgnore
     private Menu menuByMenuId;
 
     @Id
@@ -66,6 +70,7 @@ public class RolMenu {
     public void setRolByRolId(Rol rolByRolId) {
         this.rolByRolId = rolByRolId;
     }
+
 
     @ManyToOne(optional=false)
     @JoinColumn(name = "MenuId", referencedColumnName = "MenuId", nullable = false,insertable=false, updatable=false)
