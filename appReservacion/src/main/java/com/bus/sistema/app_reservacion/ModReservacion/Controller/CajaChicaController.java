@@ -1,8 +1,6 @@
 package com.bus.sistema.app_reservacion.ModReservacion.Controller;
 
-import com.bus.sistema.app_reservacion.ModReservacion.Domain.Endoce;
 import com.bus.sistema.app_reservacion.ModReservacion.Domain.Entradadiaria;
-import com.bus.sistema.app_reservacion.ModReservacion.Domain.Salida;
 import com.bus.sistema.app_reservacion.ModReservacion.Domain.Salidadiaria;
 import com.bus.sistema.app_reservacion.ModReservacion.Services.EntradaDiariaService;
 import com.bus.sistema.app_reservacion.ModReservacion.Services.SalidaDiariaService;
@@ -17,12 +15,17 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.Date;
 
-
+/**
+ * Controladores de la Caja Chica
+ */
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/CajaChica")
 @Controller
 public class CajaChicaController {
+    /**
+     * Inyecciond de Dependencias (IoD) del servicio de entrada se inyecta con el servicio implementaado
+     */
     @Autowired
     @Qualifier("entradaDiariaServiceImpl")
     private EntradaDiariaService entradaDiariaService;
@@ -37,6 +40,12 @@ public class CajaChicaController {
     }
 
 
+    /**
+     * Metodo Para mostrar una vista  "/modreservacionView/CajaChica/CajaChica"
+     * @param entradadiaria objeto de entrada Diaria
+     * @param salidadiaria objeto de salida Diaria
+     * @return retorn una vista con los objetos mencionados
+     */
     @GetMapping("/AddEntradaSalida")
     public ModelAndView addEntradaSalida(@ModelAttribute("entradadiaria") Entradadiaria entradadiaria, @ModelAttribute("salidadiaria") Salidadiaria salidadiaria) {
         ModelAndView mv = new ModelAndView("/modreservacionView/CajaChica/CajaChica");
@@ -49,7 +58,7 @@ public class CajaChicaController {
         mv.addObject("salidadiariaObject", salidadiaria);
         mv.addObject("totalSalida", Util.totalSalida(salidaDiariaService.listAllSalidaDiariasXFecha(new java.sql.Date(new Date().getTime()))));
 
-        mv.addObject("total", Util.totalEntrada(entradaDiariaService.listAllEntradadiariasXFecha(new java.sql.Date(new Date().getTime())))-
+        mv.addObject("total", Util.totalEntrada(entradaDiariaService.listAllEntradadiariasXFecha(new java.sql.Date(new Date().getTime()))) -
                 Util.totalSalida(salidaDiariaService.listAllSalidaDiariasXFecha(new java.sql.Date(new Date().getTime()))));
 
         return mv;
@@ -88,11 +97,8 @@ public class CajaChicaController {
     }
 
 
-
-
-
     @GetMapping("/AddEntradaSalidaFecha")
-    public ModelAndView addEntradaSalidaFecha(@ModelAttribute("entradadiaria") Entradadiaria entradadiaria, @ModelAttribute("salidadiaria") Salidadiaria salidadiaria,@PathVariable("date") java.sql.Date date) {
+    public ModelAndView addEntradaSalidaFecha(@ModelAttribute("entradadiaria") Entradadiaria entradadiaria, @ModelAttribute("salidadiaria") Salidadiaria salidadiaria, @PathVariable("date") java.sql.Date date) {
         ModelAndView mv = new ModelAndView("/modreservacionView/CajaChica/CajaChica");
 
         mv.addObject("entradadiariaObject", entradadiaria);
@@ -111,8 +117,8 @@ public class CajaChicaController {
 
     @GetMapping("/VistaFecha/{fecha}")
     public ModelAndView cargarVistaFecha(@PathVariable("fecha") java.sql.Date fecha) {
-        System.out.println("\n\n"+fecha+"\n");
-        return addEntradaSalidaFecha(new Entradadiaria(), new Salidadiaria(),fecha);
+        System.out.println("\n\n" + fecha + "\n");
+        return addEntradaSalidaFecha(new Entradadiaria(), new Salidadiaria(), fecha);
         //return addEntradaSalidaFecha(new Entradadiaria(), new Salidadiaria(),fecha);
     }
 

@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Util {
 
@@ -64,5 +65,11 @@ public class Util {
             System.out.println( encriptarContrasena("admin"));
 
         }
+
+        Stream<String> streamEmpty = Stream.empty();
+    }
+
+    public Stream<String> streamOf(List<String> list) {
+        return list == null || list.isEmpty() ? Stream.empty() : list.stream();
     }
 }

@@ -51,7 +51,7 @@ public class ReservacionController {
 
     @GetMapping(value = {"/home", "/", "/index", "/Calendario"})
     public ModelAndView index() {
-        ModelAndView model = new ModelAndView("/modreservacionView/Pasaje/Calendario");
+        ModelAndView model = new ModelAndView("/ModReservacionView/Pasaje/Calendario");
         model.addObject("listaPersonas", personaService.listAllPersona());
         return model;
     }
