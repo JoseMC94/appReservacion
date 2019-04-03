@@ -6,7 +6,7 @@
     <groupId>com.bus.sistema</groupId>
     <artifactId>app_reservacion</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>app_reservacion</name>
     <description>Sistema de Reservacion de Pasajes - Ayacucho - 2018</description>
