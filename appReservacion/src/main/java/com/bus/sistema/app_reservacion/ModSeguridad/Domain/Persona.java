@@ -2,6 +2,7 @@ package com.bus.sistema.app_reservacion.ModSeguridad.Domain;
 
 import com.bus.sistema.app_reservacion.ModReservacion.Domain.Endocedetalle;
 import com.bus.sistema.app_reservacion.ModReservacion.Domain.Pasaje;
+import com.bus.sistema.app_reservacion.ModVenta.Domain.Venta;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -29,6 +30,8 @@ public class Persona {
     private Collection<Endocedetalle> endocedetallesByPersonaId;
     @JsonIgnore
     private Collection<Pasaje> pasajesByPersonaId;
+    @JsonIgnore
+    private Collection<Venta> ventasByPersonaId;
 
     @Id
     @Column(name = "PersonaId", nullable = false)
@@ -205,4 +208,31 @@ public class Persona {
         this.pasajesByPersonaId = pasajesByPersonaId;
     }
 
+    @OneToMany(mappedBy = "personaByPersonaId")
+    public Collection<Venta> getVentasByPersonaId() {
+        return ventasByPersonaId;
+    }
+
+    public void setVentasByPersonaId(Collection<Venta> ventasByPersonaId) {
+        this.ventasByPersonaId = ventasByPersonaId;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "personaId=" + personaId +
+                ", nombres='" + nombres + '\'' +
+                ", paterno='" + paterno + '\'' +
+                ", materno='" + materno + '\'' +
+                ", nombreCompleto='" + nombreCompleto + '\'' +
+                ", dni='" + dni + '\'' +
+                '}';
+    }
+
+    public Persona(int personaId, String nombreCompleto) {
+        this.personaId = personaId;
+        this.nombreCompleto = nombreCompleto;
+    }
+    public Persona() {
+    }
 }

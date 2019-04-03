@@ -16,7 +16,7 @@ public class EndoceController {
     @GetMapping(value = {"/home", "/", "/index", "/Endoce"})
     public ModelAndView index() {
        /* ModelAndView model = new ModelAndView("/modreservacionView/Vehiculo/index");
-        return model;*/
+        return model; */
         return addEndoce(new Endoce());
     }
 

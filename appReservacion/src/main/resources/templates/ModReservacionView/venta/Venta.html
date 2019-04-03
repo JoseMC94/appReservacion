@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<body>
+<div th:fragment="content">
+
+
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2 th:text="${ventaObject.personaByPersonaId.nombreCompleto}"></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <center>
+                    <h2>SALDO: <span th:text="${saldo}"></span></h2>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalDescontar">
+                        DESCONTAR
+                    </button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalAgregar">
+                        AGREGAR
+                    </button>
+                </center>
+                <h2>Registro Diario</h2>
+                <hr/>
+                <table id="tabla1" class="table table-striped table-bordered bulk_action">
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Monto Descuento</th>
+                        <th>Monto Saldo</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                    <tr th:each="venta : ${listaVentaPorPersona}">
+                        <td th:text="${venta.fecha}"></td>
+                        <td th:text="${venta.descripcion}"></td>
+                        <td th:text="${venta.montoDescuento}"></td>
+                        <td th:text="${venta.montoSaldo}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalDescontar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2">DESCONTAR</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal form-label-left input_mask"
+                          th:action="@{/Venta/SaveVentaDescontar}"
+                          th:object="${ventaObject}" method="post">
+
+                        <div class="form-group">
+                            <!--id-->
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="hidden" class="form-control" th:field="*{ventaId}" placeholder=""/>
+                            </div>
+                            <!--Personaid-->
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="hidden" class="form-control" th:field="*{personaId}" placeholder=""/>
+                            </div>
+                        </div>
+
+                        <!--Fecha-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="date" class="form-control has-feedback-left" th:field="*{fecha}"
+                                   placeholder="FECHA*" required=""/>
+                            <span class="fa fa-calendar form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <!--Monto-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input min="0" step="any" type="number" class="form-control has-feedback-left"
+                                   th:field="*{montoDescuento}" placeholder="MONTO*" value=""
+                                   required=""/>
+                            <span class="fa fa-usd form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <!--Descripcion-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left" placeholder="DESCRIPCION*"
+                                   th:field="*{descripcion}"
+                                   required=""/>
+                            <span class="fa fa-file-text-o form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+
+                        <div></div>
+                        <br/> <br/>
+                        <div class="form-group">
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <!-- <button type="button" class="btn btn-primary">Cancel</button>
+                                 <button class="btn btn-primary" type="reset">Reset</button>-->
+                                <button type="submit" class="btn btn-info btn-md">GUARDAR
+                                    <span class="fa fa-check"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModalAgregar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">AGREGAR</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal form-label-left input_mask"
+                          th:action="@{/Venta/SaveVentaAgregar}"
+                          th:object="${ventaObject}" method="post">
+
+                        <div class="form-group">
+                            <!--id-->
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="hidden" class="form-control" th:field="*{ventaId}" placeholder=""/>
+                            </div>
+                            <!--Personaid-->
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="hidden" class="form-control" th:field="*{personaId}" placeholder=""/>
+                            </div>
+                        </div>
+
+                        <!--Fecha-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="date" class="form-control has-feedback-left" th:field="*{fecha}"
+                                   placeholder="FECHA*" required=""/>
+                            <span class="fa fa-calendar form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <!--Monto-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input min="0" step="any" type="number" class="form-control has-feedback-left"
+                                   th:field="*{MontoSaldo}" placeholder="MONTO*" value=""
+                                   required=""/>
+                            <span class="fa fa-usd form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <!--Descripcion-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left" placeholder="DESCRIPCION*"
+                                   th:field="*{descripcion}"
+                                   required=""/>
+                            <span class="fa fa-file-text-o form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+
+                        <div></div>
+                        <br/> <br/>
+                        <div class="form-group">
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <!-- <button type="button" class="btn btn-primary">Cancel</button>
+                                 <button class="btn btn-primary" type="reset">Reset</button>-->
+                                <button type="submit" class="btn btn-info btn-md">GUARDAR
+                                    <span class="fa fa-check"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        $(document).ready(function () {
+            $('#tabla1').DataTable({
+                "lengthChange": false,
+            });
+        });
+        /*]]>*/
+    </script>
+</div>
+</body>
+</html>

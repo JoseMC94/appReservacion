@@ -47,8 +47,10 @@ public class PersonaController {
     @PostMapping("/SavePersona")
     public ModelAndView save(@Valid Persona persona, BindingResult result, String single_cal3) {
         persona.setNombreCompleto(persona.getNombres() + " " + persona.getPaterno() + " " + persona.getMaterno());
-        if (result.hasErrors())
+        if (result.hasErrors()) {
+            System.out.println("\n\nerror: " + result.getAllErrors());
             return addPersona(persona);
+        }
         personaService.save(persona);
         return index();
     }
@@ -58,7 +60,6 @@ public class PersonaController {
     public ModelAndView edit(@PathVariable("id") int id) {
         return addPersona(personaService.findOneById(id));
     }
-
 
 
     @Autowired
@@ -90,5 +91,20 @@ public class PersonaController {
         return new ResponseEntity<Persona>(user, HttpStatus.OK);
     }
 
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/persons", method = RequestMethod.GET)
+    public ResponseEntity<List<Persona>> listAllPerson() {
+        List<Persona> persons = personaService.listAllPersona();
+        for (Persona p : personaService.listAllPersona()) {
+            persons.add(
+                  new Persona(p.getPersonaId(),p.getNombreCompleto())
+            );
+        }
+        if (persons.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Persona>>(persons, HttpStatus.OK);
+    }
 
 }

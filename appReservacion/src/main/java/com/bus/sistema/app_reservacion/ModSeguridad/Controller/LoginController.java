@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.lang.annotation.*;
 
@@ -26,15 +27,15 @@ public class LoginController {
     }
 
 
-    @Layout(value = "layouts/login")
     @GetMapping("/login")
-    public String showLoginForm(Model model,
+    @Layout(value = "layouts/login")
+    public ModelAndView showLoginForm(ModelAndView model,
                                 @RequestParam(name = "error", required = false) String error,
                                 @RequestParam(name = "logout", required = false) String logout) {
-        model.addAttribute("error", error);
-        model.addAttribute("logout", logout);
+        model.addObject("error", error);
+        model.addObject("logout", logout);
         //return  ViewConstant.LOGIN;
-        return "login";
+        return model;
     }
 
     @GetMapping({"/loginsucces"})

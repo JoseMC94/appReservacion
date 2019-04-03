@@ -10,5 +10,6 @@ import java.util.ArrayList;
 @Repository("personaRepository")
 public interface PersonaRepository extends JpaRepository<Persona, Serializable> {
     public abstract Persona findPersonaByDni(String id);
+    Persona findByNombreCompleto(String nombreCompleto);
 
 }

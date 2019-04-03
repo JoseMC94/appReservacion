@@ -1,6 +1,9 @@
 * {
     margin: 0;
 }
+.dataTables_filter {
+    float: left !important;
+}
 
 .btnFloat {
     width: 90px;

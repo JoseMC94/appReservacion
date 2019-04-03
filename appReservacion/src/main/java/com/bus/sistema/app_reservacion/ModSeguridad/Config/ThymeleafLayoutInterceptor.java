@@ -9,6 +9,7 @@ import com.bus.sistema.app_reservacion.ModSeguridad.Repository.RolMenuRepository
 import com.bus.sistema.app_reservacion.ModSeguridad.Repository.UserRolRepository;
 import com.bus.sistema.app_reservacion.ModSeguridad.Services.ServicesImpl.UserServiceImpl;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,21 +39,24 @@ public class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter {
         String layoutName = getLayoutName(handler);
         modelAndView.setViewName(layoutName);
         modelAndView.addObject(DEFAULT_VIEW_ATTRIBUTE_NAME, originalViewName);
-        if (!SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")) {
-            WebApplicationContext applicationContext = RequestContextUtils.getWebApplicationContext(request);
-            UserServiceImpl userService = (UserServiceImpl) ((WebApplicationContext) applicationContext).getBean("userServiceEImpl");
-            UserRolRepository userRolRepository = (UserRolRepository) ((WebApplicationContext) applicationContext).getBean("userRolRepository");
-            RolMenuRepository rolMenuRepository = (RolMenuRepository) ((WebApplicationContext) applicationContext).getBean("rolMenuRepository");
-            MenuRepository menuRepository = (MenuRepository) ((WebApplicationContext) applicationContext).getBean("menuRepository");
-            User user = userService.findOne(SecurityContextHolder.getContext().getAuthentication().getName());
-            List<RolMenu> listRolMenu = rolMenuRepository.findAllByRolId(userRolRepository.findByUsuarioId(userService.findOne(user.getUsername()).getUsuarioId()).getRolId());
-            List<Menu> listMenu = menuRepository.findAll();
-            ArrayList<Menu> listaMenuUsuario = new ArrayList<>();
-            listRolMenu.forEach(rolMenu -> listMenu.stream().filter(menu -> rolMenu.getMenuId() == menu.getMenuId()).forEach(listaMenuUsuario::add));
-            modelAndView.addObject("menus", listMenu);
-            modelAndView.addObject("menus2", listMenu);
-            modelAndView.addObject("usuarioConectado", userService.findOne(user.getUsername()).getPersonaByPersonaId().getNombres()+" "+userService.findOne(user.getUsername()).getPersonaByPersonaId().getPaterno());
-        }
+
+
+            if (!SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")) {
+                WebApplicationContext applicationContext = RequestContextUtils.getWebApplicationContext(request);
+                UserServiceImpl userService = (UserServiceImpl) ((WebApplicationContext) applicationContext).getBean("userServiceEImpl");
+                UserRolRepository userRolRepository = (UserRolRepository) ((WebApplicationContext) applicationContext).getBean("userRolRepository");
+                RolMenuRepository rolMenuRepository = (RolMenuRepository) ((WebApplicationContext) applicationContext).getBean("rolMenuRepository");
+                MenuRepository menuRepository = (MenuRepository) ((WebApplicationContext) applicationContext).getBean("menuRepository");
+                User user = userService.findOne(SecurityContextHolder.getContext().getAuthentication().getName());
+                List<RolMenu> listRolMenu = rolMenuRepository.findAllByRolId(userRolRepository.findByUsuarioId(userService.findOne(user.getUsername()).getUsuarioId()).getRolId());
+                List<Menu> listMenu = menuRepository.findAll();
+                ArrayList<Menu> listaMenuUsuario = new ArrayList<>();
+                listRolMenu.forEach(rolMenu -> listMenu.stream().filter(menu -> rolMenu.getMenuId() == menu.getMenuId()).forEach(listaMenuUsuario::add));
+                modelAndView.addObject("menus", listMenu);
+                modelAndView.addObject("menus2", listMenu);
+                modelAndView.addObject("usuarioConectado", userService.findOne(user.getUsername()).getPersonaByPersonaId().getNombres() + " " + userService.findOne(user.getUsername()).getPersonaByPersonaId().getPaterno());
+            }
+
 
 
     }

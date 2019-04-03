@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<body>
+<div th:fragment="content">
+
+    <form class="form-horizontal form-label-left input_mask" th:action="@{/Reporte/Mostrar}"
+          method="post">
+
+        <!--nombre-->
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <input type="text" class="form-control has-feedback-left" name="nombreCompleto" id="nombreCompleto"
+                   placeholder="NOMBRE*" required=""/>
+            <span class="fa fa-calendar form-control-feedback left"
+                  aria-hidden="true"></span>
+        </div>
+
+        <!--nombre-->
+        <div class="col-md-2 col-sm-4 col-xs-12 form-group has-feedback">
+            <select class="form-control" name="mes" id="mes">
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Setiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+        </div>
+
+        <div class="col-md-2 col-sm-4 col-xs-12 form-group has-feedback">
+            <select class="form-control" name="ano" id="ano"></select>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-12 form-group has-feedback">
+            <button class="btn-danger form-control">CONSULTAR</button>
+        </div>
+    </form>
+
+
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12 col-md-offset-3">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-sort-amount-asc"></i>
+            </div>
+            <div class="count"><span th:text="${ingresos}"></span></div>
+
+            <h3>Ingreos</h3>
+        </div>
+    </div>
+
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-sort-amount-desc"></i>
+            </div>
+            <div class="count"><span th:text="${egresos}"></span></div>
+
+            <h3>Egresos</h3>
+        </div>
+    </div>
+
+
+    <table id="tabla1" class="table table-striped table-bordered bulk_action">
+        <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Monto Descuento</th>
+            <th>Monto Saldo</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+        <tr th:each="venta : ${lista}">
+            <td th:text="${venta.fecha}"></td>
+            <td th:text="${venta.descripcion}"></td>
+            <td th:text="${venta.montoDescuento}"></td>
+            <td th:text="${venta.montoSaldo}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        $(document).ready(function () {
+            $("#nombreCompleto").easyAutocomplete(options);
+            window.onload = ComboAno;
+        });
+
+        function ComboAno() {
+            var n = (new Date()).getFullYear()
+            var select = document.getElementById("ano");
+            for (var i = n; i >= 1900; i--) select.options.add(new Option(i, i));
+        };
+        var options = {
+            url: "/appReservacion/Persona/user/",
+            getValue: "nombreCompleto",
+            list: {
+                match: {
+                    enabled: true
+                }
+            },
+            theme: "square"
+        };
+        /*]]>*/
+    </script>
+</div>
+</body>
+</html>

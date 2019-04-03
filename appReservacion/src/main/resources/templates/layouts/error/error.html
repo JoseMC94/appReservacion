@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<body>
+<div th:fragment="content">
+
+    <div class="container main-content mt-3">
+        <br /><br />
+        <h2 class="mt-2">Ups!</h2>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-danger"><h3 th:text="${error}">Status</h3></li>
+            <li class="list-group-item" th:text="'Status code: '+ ${status}"></li>
+        </ul>
+        <p><a href="/" th:href="@{/}">Back to home...</a></p>
+    </div>
+</div>
+</body>
+</html>

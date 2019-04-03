@@ -29,6 +29,10 @@
         <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.Entradadiaria"/>
         <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.Salidadiaria"/>
         <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.ConfigendoceEntity"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModVenta.Domain.VentaEntity"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModVenta.Domain.Venta"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Venta"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModVenta.Domain.Producto"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

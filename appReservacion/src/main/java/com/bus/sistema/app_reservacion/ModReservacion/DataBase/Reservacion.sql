@@ -134,9 +134,31 @@ Create table ConfigEndoce
 (
   ConfigEndoceId   int(11) PRIMARY KEY auto_increment not NULL,
   Nombre           VARCHAR(255)                       not NULL,
-  Movilidad        decimal(6,2)                       not NULL,
-  Guia             decimal(5,2)                       not NULL,
-  CantidadPasajero decimal(6,2)                       not NULL,
-  CostoEndoce      decimal(6,2)                       not NULL
+  Movilidad        decimal(6, 2)                      not NULL,
+  Guia             decimal(5, 2)                      not NULL,
+  CantidadPasajero decimal(6, 2)                      not NULL,
+  CostoEndoce      decimal(6, 2)                      not NULL
 );
 
+
+DROP TABLE IF EXISTS Venta;
+Create table Venta
+(
+  VentaId     int(11) PRIMARY KEY auto_increment not NULL,
+  Fecha       date                               not NULL,
+  Monto       decimal(6, 2)                      not NULL,
+  Descripcion varchar(6255)                      not NULL,
+  PersonaId   INT(11)                            NOT NULL,
+  FOREIGN KEY (PersonaId) REFERENCES Persona (PersonaId) on DELETE no action on UPDATE CASCADE
+);
+
+
+DROP TABLE IF EXISTS Producto;
+Create table Producto
+(
+  ProductoId  int(11) PRIMARY KEY auto_increment not NULL,
+  Nombre      varchar(6255)                      not NULL,
+  Descripcion varchar(6255)                      not NULL,
+  Precio      decimal(6, 2)                      not NULL,
+  cantidad    int(6)                      not NULL
+);
