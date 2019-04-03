@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/reservacion?useSSL=false</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <!--<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>-->
+        <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Menu"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Persona"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Rol"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.RolMenu"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.User"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.UserRole"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Cargo"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Oficina"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.Vehiculo"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.Salida"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.Pasaje"/>
+        <!--<mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.User"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Pasaje"/>-->
+        <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.Endoce"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.Endocedetalle"/>
+        <!--
+            <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Endocedetalle"/>
+        -->
+        <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.Detallevehiculo"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.Entradadiaria"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.Salidadiaria"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModReservacion.Domain.ConfigendoceEntity"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModVenta.Domain.VentaEntity"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModVenta.Domain.Venta"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Venta"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModVenta.Domain.Producto"/>
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

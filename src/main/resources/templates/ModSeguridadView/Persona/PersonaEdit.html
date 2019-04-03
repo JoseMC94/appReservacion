@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<body>
+<div th:fragment="content">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>GESTIÓN DE PERSONA</h3>
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Form Design
+                        <small>different form elements</small>
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br/>
+                    <form class="form-horizontal form-label-left input_mask" th:action="@{/Persona/SavePersona}"
+                          th:object="${personaObject}" method="post">
+
+                        <div class="form-group">
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="hidden" class="form-control" th:field="*{personaId}"
+                                       placeholder=""></input>
+                            </div>
+                        </div>
+
+                        <!--DNI-->
+                        <div class="col-md-2 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left" id="DNI"
+                                   th:field="*{dni}" placeholder="DNI*"/>
+                            <span class="fa fa-search form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <!--NOMBRE-->
+                        <div class="col-md-4 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   th:field="*{nombres}" placeholder="Nombres*"/>
+                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <!--APELLIDO PATERNO-->
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   th:field="*{paterno}" placeholder="Ape. Paterno*"/>
+                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <!--APELLIDO MATERNO-->
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   th:field="*{materno}" placeholder="Ape. Paterno*"/>
+                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+
+                        <!--NACIMIENTO-->
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+
+                            <input type="date" class="form-control has-feedback-left"
+                                   th:field="*{fechaNacimiento}" placeholder="Ape. Paterno*"/>
+                            <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+
+                            <!-- <input  type="text" class="form-control has-feedback-left " id="single_cal3"
+                                     placeholder="NACIMIENTO" th:field="*{fechaNacimiento}" aria-describedby="inputSuccess2Status3"/>
+                              <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                              <span id="inputSuccess2Status3" class="sr-only">(success)</span>-->
+                        </div>
+
+                        <!--SEXO-->
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                            <select th:field="*{sexo}" class="form-control">
+                                <option value="M">MASCULINO</option>
+                                <option value="F">FEMENINO</option>
+                            </select>
+                        </div>
+
+                        <!--CELULAR-->
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   th:field="*{celular}" id="fechaNac" placeholder="Celular"/>
+                            <span class="fa  fa-phone  form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <!--CORREO-->
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   th:field="*{correo}" placeholder="Correo"/>
+                            <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <!--DIRECCION-->
+                        <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   th:field="*{direccion}" placeholder="Dirección"/>
+                            <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <!--REFERENCIA-->
+                        <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   th:field="*{referencia}" placeholder="Referencia"/>
+                            <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+
+                        <!--
+
+                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                    <input type="text" class="form-control" id="inputSuccess3" placeholder="Last Name"/>
+                                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                    <input type="text" class="form-control has-feedback-left" id="inputSuccess4"
+                                                           placeholder="Email"/>
+                                                    <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                    <input type="text" class="form-control" id="inputSuccess5" placeholder="Phone"/>
+                                                    <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                                                </div>
+                        -->
+
+                        <div class="form-group">
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <!-- <button type="button" class="btn btn-primary">Cancel</button>
+                                 <button class="btn btn-primary" type="reset">Reset</button>-->
+                                <button type="submit" class="btn btn-success btn-md">GUARDAR <span class="fa fa-check"
+                                                                                                   aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        $(document).ready(function () {
+            /*$("#single_cal3").val($("#single_cal3").val().dateFormat);
+            console.log($("#inputSuccess2Status3").val());*/
+        });
+        /*]]>*/
+    </script>
+</div>
+</body>
+</html>

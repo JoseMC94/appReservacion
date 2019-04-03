@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<body>
+
+
+<div th:fragment="content">
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>MANTENER PASAJEROS</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                           role="button"
+                           aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <form id="form-pasaje" class="form-horizontal form-label-left input_mask"
+                      th:action="@{/Reservacion/SavePasaje}"
+                      th:object="${pasajeObject}" method="post">
+
+                    <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="hidden" class="form-control" th:field="*{pasajeId}" th:value="${pasajeId}"
+                                   placeholder=""></input>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="hidden" class="form-control" th:field="*{usuarioId}" th:value="${usuarioId}"
+                                   placeholder=""></input>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="hidden" class="form-control" th:field="*{salidaId}" th:value="${salidaId}"
+                                   placeholder=""></input>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="hidden" class="form-control" th:field="*{personaId}" id="personaId"
+                                   name="personaId"
+                                   placeholder=""></input>
+                        </div>
+                    </div>
+
+
+                    <!--FECHA-->
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group has-feedback">
+                        <input type="date" class="form-control has-feedback-left"
+                               placeholder="Fecha*" th:field="*{fechaSalida}" th:value="${fecha}"/>
+                        <span class="fa fa-search form-control-feedback left"
+                              aria-hidden="true"></span>
+                    </div>
+                    <div class="row"></div>
+
+                    <!--VENDEDOR-->
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="vendedor"
+                               placeholder="Vendedor*" th:value="${usuarioConectado}"/>
+                        <span class="fa fa-user form-control-feedback left"
+                              aria-hidden="true"></span>
+                    </div>
+
+                    <div class="row"></div>
+
+                    <!--DNI-->
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="dni"
+                               placeholder="DNI*" th:field="*{Dni}"/>
+                        <span class="fa fa-search form-control-feedback left"
+                              aria-hidden="true"></span>
+                    </div>
+
+                    <!--BOTON BUSCAR - AGREGAR -->
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group has-feedback">
+                        <button type="button" class="btn btn-round btn-info"
+                                onclick="traerDni($('#dni').val());return false;">
+                                                            <span class="glyphicon glyphicon-search"
+                                                                  aria-hidden="true"></span></button>
+                        <button type="button" class="btn btn-round btn-info" data-toggle="modal"  data-target="#myModalPersona">
+                                                            <span class="glyphicon glyphicon-plus"
+                                                                  aria-hidden="true"></span></button>
+
+                    </div>
+                    <div class="row"></div>
+
+                    <!--NOMBRES-->
+                    <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="nombre"
+                               placeholder="Nombres*" th:field="*{nombre}"/>
+                        <span class="fa fa-user form-control-feedback left"
+                              aria-hidden="true"></span>
+                    </div>
+
+                    <!--APELLIDOS-->
+                    <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="apellido"
+                               placeholder="Apellidos*" th:field="*{apellido}"/>
+                        <span class="fa fa-user form-control-feedback left"
+                              aria-hidden="true"></span>
+                    </div>
+
+                    <!--SALIDA-->
+                    <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left"
+                               placeholder="Salida*" th:value="${salida}"/>
+                        <span class="fa fa-user form-control-feedback left"
+                              aria-hidden="true"></span>
+                    </div>
+
+                    <!--NUMERO ASIENTO-->
+                    <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left"
+                               placeholder="N° Asiento*" th:field="*{numeroAsiento}" th:value="${asiento}"/>
+                        <span class="fa fa-envelope form-control-feedback left"
+                              aria-hidden="true"></span>
+                    </div>
+
+                    <div id="app2">
+                        <!--PRECIO-->
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="precio*" id="precio" th:field="*{precio}" th:value="${precio}"/>
+                            <span class="fa fa-envelope form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <!--ABONO-->
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="number" class="form-control has-feedback-left"
+                                   placeholder="abono*" v-model="abono" th:field="*{abono}"/>
+                            <span class="fa fa-envelope form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+
+                        <!--SALDO-->
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="Saldo*" :value="'SALDO:'+ (precio-abono)" th:field="*{saldo}"/>
+                            <span class="fa fa-envelope form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                    </div>
+                    <!--CHOFER-->
+                    <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left"
+                               placeholder="CHOFER*" th:value="${chofer}"/>
+                        <span class="fa fa-user form-control-feedback left"
+                              aria-hidden="true"></span>
+                    </div>
+                    <main>
+
+                        <!--endoce-->
+                        <div class="[ form-group col-md-3 col-sm-12 col-xs-12 form-group has-feedback]">
+                            <input type="checkbox" name="fancy-checkbox-info" id="fancy-checkbox-info"
+                                   autocomplete="off" v-model="checked"/>
+                            <div class="[ btn-group ]">
+                                <label for="fancy-checkbox-info" class="[ btn btn-info ]">
+                                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="fancy-checkbox-info" class="[ btn btn-default active ]">
+                                    ENDOCE ?
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <!--EMPRESA-->
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback" v-show="checked">
+                            <select th:field="*{endoce}" class="form-control">
+                                <option th:each="endoce : ${ListaEndoces}" th:value="${endoce.denominacion}"
+                                        th:text="${endoce.denominacion}"></option>
+                            </select>
+                        </div>
+                        <div class="row"></div>
+
+
+                        <!--HOTEL-->
+                        <div class="[ form-group col-md-3 col-sm-12 col-xs-12 form-group has-feedback]">
+                            <input type="checkbox" name="fancy-checkbox-info" id="fancy-checkbox-info2"
+                                   autocomplete="off" v-model="hotel"/>
+                            <div class="[ btn-group ]">
+                                <label for="fancy-checkbox-info2" class="[ btn btn-info ]">
+                                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="fancy-checkbox-info2" class="[ btn btn-default active ]">
+                                    HOTEL ?
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="row"></div>
+                        <div class="x_panel" v-show="hotel">
+                            <div class="x_content">
+                                <!--NOMBRE HOTEL-->
+                                <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+                                    <input type="text"
+                                           class="form-control has-feedback-left"
+                                           placeholder="NOMBRE HOTEL*" th:field="*{nombreHotel}"/>
+                                    <span class="fa fa-search form-control-feedback left"
+                                          aria-hidden="true"></span>
+                                </div>
+                                <!--DIAS-->
+                                <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                                    <input type="date"
+                                           class="form-control has-feedback-left"
+                                           placeholder="Fecha ingreso*" th:field="*{fechaIngresoHotel}"/>
+                                    <span class="fa fa-search form-control-feedback left"
+                                          aria-hidden="true"></span>
+                                </div>
+                                <!--NOCHES-->
+                                <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                                    <input type="date"
+                                           class="form-control has-feedback-left"
+                                           placeholder="Fecha Salida*" th:field="*{fechaSalidaHotel}"/>
+                                    <span class="fa fa-search form-control-feedback left"
+                                          aria-hidden="true"></span>
+                                </div>
+                                <!--PRECIO HOTEL-->
+                                <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                                    <input type="number"
+                                           class="form-control has-feedback-left"
+                                           placeholder="PRECIO HOTEL*" th:field="*{precioHotel}"/>
+                                    <span class="fa fa-search form-control-feedback left"
+                                          aria-hidden="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-4 col-xs-12">
+                            <!-- <button type="button" class="btn btn-primary">Cancel</button>
+                             <button class="btn btn-primary" type="reset">Reset</button>-->
+                            <button type="submit" class="btn btn-info btn-md">
+                                GUARDAR
+                                <span class="fa fa-check"
+                                      aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="modal fade" id="myModalPersona" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">REGISTRO CLIENTE</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <form id="frm-adjuntar" class="form-horizontal form-label-left input_mask"
+                                      th:action="@{/Persona/SavePersona}"
+                                      th:object="${personaObject}" method="post">
+
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <input type="hidden" class="form-control"
+                                                   th:field="*{personaId}"
+                                                   placeholder=""></input>
+                                        </div>
+                                    </div>
+
+                                    <!--DNI-->
+                                    <div class="col-md-4 col-sm-12 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" id="DNI"
+                                               th:field="*{dni}" placeholder="DNI*"/>
+                                        <span class="fa fa-search form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+                                    <!--NOMBRE-->
+                                    <div class="col-md-8 col-sm-12 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left"
+                                               th:field="*{nombres}" placeholder="Nombres*"/>
+                                        <span class="fa fa-user form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+                                    <!--APELLIDO PATERNO-->
+                                    <div class="col-md-4 col-sm-12 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left"
+                                               th:field="*{paterno}" placeholder="Ape. Paterno*"/>
+                                        <span class="fa fa-user form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+                                    <!--APELLIDO MATERNO-->
+                                    <div class="col-md-4 col-sm-12 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left"
+                                               th:field="*{materno}" placeholder="Ape. Paterno*"/>
+                                        <span class="fa fa-user form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+
+                                    <!--NACIMIENTO-->
+                                    <div class="col-md-4 col-sm-12 col-xs-12 form-group has-feedback">
+
+                                        <input type="date" class="form-control has-feedback-left"
+                                               th:field="*{fechaNacimiento}" placeholder="Ape. Paterno*"/>
+                                        <span class="fa fa-calendar-o form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+                                    <!--SEXO-->
+                                    <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                                        <select th:field="*{sexo}" class="form-control">
+                                            <option value="M">MASCULINO</option>
+                                            <option value="F">FEMENINO</option>
+                                        </select>
+                                    </div>
+
+                                    <!--CELULAR-->
+                                    <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left"
+                                               th:field="*{celular}" id="fechaNac" placeholder="Celular"/>
+                                        <span class="fa  fa-phone  form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+                                    <!--CORREO-->
+                                    <div class="col-md-3 col-sm-12 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left"
+                                               th:field="*{correo}" placeholder="Correo"/>
+                                        <span class="fa fa-envelope form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+                                    <!--DIRECCION-->
+                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left"
+                                               th:field="*{direccion}" placeholder="Dirección"/>
+                                        <span class="fa fa-map-marker form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+                                    <!--REFERENCIA-->
+                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left"
+                                               th:field="*{referencia}" placeholder="Referencia"/>
+                                        <span class="fa fa-map-marker form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+                                    <div></div>
+                                    <br/> <br/>
+                                    <div class="form-group">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <!-- <button type="button" class="btn btn-primary">Cancel</button>
+                                             <button class="btn btn-primary" type="reset">Reset</button>-->
+                                            <button type="submit" class="btn btn-info btn-md">GUARDAR
+                                                <span class="fa fa-check"
+                                                      aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            .form-group input[type="checkbox"] {
+                display: none;
+            }
+
+            .form-group input[type="checkbox"] + .btn-group > label span {
+                width: 20px;
+            }
+
+            .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+                display: none;
+            }
+
+            .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+                display: inline-block;
+            }
+
+            .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+                display: inline-block;
+            }
+
+            .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+                display: none;
+            }
+        </style>
+
+        <script type="text/javascript" th:inline="javascript">
+            /*<![CDATA[*/
+            $(document).ready(function () {
+
+                var app = new Vue({
+                    el: 'main',
+                    data: {
+                        checked: false,
+                        hotel: false,
+                    }
+                });
+                var app2 = new Vue({
+                    el: '#app2',
+                    data: {
+                        saldo: "",
+                        abono: "",
+                        precio: $('#precio').val(),
+
+                    }
+                })  ;
+
+                $('#frm-adjuntar').on('keyup keypress', function(e) {
+                  var keyCode = e.keyCode || e.which;
+                  if (keyCode === 13) {
+                    e.preventDefault();
+                    return false;
+                  }
+                });
+                $('#form-pasaje').on('keyup keypress', function(e) {
+                    var keyCode = e.keyCode || e.which;
+                    if (keyCode === 13) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+
+                $("#frm-adjuntar").submit(function () {
+                    var form = $(this);
+                    form.ajaxSubmit({
+                        dataType: 'JSON',
+                        type: 'POST',
+                        url: form.attr('action'),
+                        success: function () {
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert("CLIENTE REGISTRADO");
+                            location.reload(true);
+                        }
+                    });
+                    return false;
+                })
+            });
+
+            function traerDni(dni) {
+                var parametros = {"id": dni};
+                $.ajax({
+                    data: parametros,
+                    url: '/appReservacion/Persona/user/' + dni,
+                    type: 'get',
+                    beforeSend: function () {
+                        console.log("esperando")
+                    },
+                    success: function (response) {
+                        $('#nombre').val(response.nombres);
+                        $('#apellido').val(response.paterno + " " + response.materno);
+                        $('#personaId').val(response.personaId)
+                        console.log("resultaod" + response.nombreCompleto)
+                    },
+                    error: function (error) {
+                        alert("Cliente No registrado");
+                    }
+                });
+            }
+            /*]]>*/
+        </script>
+    </div>
+</div>
+</body>
+</html>

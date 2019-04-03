@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<body>
+
+
+<div th:fragment="content">
+    <!--<h1>Persona Mantenimiento</h1>-->
+
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div>
+            <div class="x_title">
+                <h2>Personas</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <ul class="list-unstyled top_profiles scroll-view">
+
+                    <li th:each="persona : ${listaPersonas}" class="media event">
+                        <a class="pull-left border-aero profile_thumb">
+                            <i class="fa fa-user aero"></i>
+                        </a>
+                        <div class="media-body">
+                            <a class="title" th:href="@{/Persona/EditPersona/{id}(id=${persona.personaId})}" th:text="${persona.nombreCompleto}"></a>
+                            <p><strong>DNI: <span th:text="${persona.dni}"></span> </strong> Sexo: <span th:text="${persona.sexo}"></span> </p>
+                            <p>
+                                Dirección: <span th:text="${persona.direccion}"></span>
+                            </p>
+                        </div>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+    <style>
+        .a{
+            width:40px;
+            height:40px;
+            border-radius:100%;
+            border:none;
+            color:#FFF;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            font-size:28px;
+            outline:none;
+            position:absolute;
+            right:0;
+            bottom:0;
+            margin-right:26px;
+            transform:scale(0);
+        }
+    </style>
+    <div class="btnFloat">
+        <a  th:href="@{/Persona/AddPersona}" class="botonF1">
+            <center><span>+</span></center>
+        </a>
+    </div>
+</div>
+</body>
+</html>

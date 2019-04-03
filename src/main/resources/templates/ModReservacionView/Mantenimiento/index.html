@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<body>
+<div th:fragment="content">
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>SALIDAS</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                        <li><a data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-striped projects">
+                        <thead>
+                        <tr>
+                            <th style="width: 1%">#</th>
+                            <th style="width: 20%">Project Name</th>
+                            <th style="width: 20%">#Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="carro : ${listaSalidas}">
+                            <td>#</td>
+                            <td>
+                                <a>
+                                    <spam th:text="${carro.denominacion}"></spam>
+                                </a>
+                                <br/>
+                                <small>
+                                    <spam th:text="${carro.fechaSalida}"></spam>
+                                </small>
+                            </td>
+                            <td>
+                                <a th:href="@{/MantenimientoReservacion/EditSalida/{id}(id=${carro.salidaId})}"
+                                   class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                                <a th:href="@{/MantenimientoReservacion/EditSalida/{id}(id=${carro.salidaId})}"
+                                   class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                <a th:href="@{/MantenimientoReservacion/DeleteSalida/{id}(id=${carro.salidaId})}"
+                                   class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- end project list -->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>ENDOCES</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                        <li><a data-toggle="modal" data-target="#myModalEndoce"><i class="glyphicon glyphicon-plus"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-striped projects">
+                        <thead>
+                        <tr>
+                            <th style="width: 1%">#</th>
+                            <th style="width: 20%">Project Name</th>
+                            <th style="width: 20%">#Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="carro : ${listaEndoces}">
+                            <td>#</td>
+                            <td>
+                                <a>
+                                    <spam th:text="${carro.denominacion}"></spam>
+                                </a>
+                                <br/>
+                                <small>
+                                    <spam th:text="${carro.descripcion}"></spam>
+                                </small>
+                            </td>
+                            <td>
+                                <a th:href="@{/MantenimientoReservacion/EditEndoce/{id}(id=${carro.endoceId})}"
+                                   class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                                <a th:href="@{/MantenimientoReservacion/EditVehiculo/{id}(id=${carro.endoceId})}"
+                                   class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                <a th:href="@{/MantenimientoReservacion/DeleteEndoce/{id}(id=${carro.endoceId})}"
+                                   class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- end project list -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">REGISTRO SALIDAS</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal form-label-left input_mask"
+                          th:action="@{/MantenimientoReservacion/SaveSalida}"
+                          th:object="${salidaObject}" method="post">
+
+                        <div class="form-group">
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="hidden" class="form-control" th:field="*{salidaId}"
+                                       placeholder=""></input>
+                            </div>
+                        </div>
+
+                        <!--DESTINO/PACK-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="DESTINO/PACK*" th:field="*{denominacion}"/>
+                            <span class="fa fa-search form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <!--VEHICULO-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <select th:field="*{vehiculoId}" class="form-control">
+                                <option th:each="carro : ${listaVehiculos}" th:value="${carro.vehiculoId}" th:text="${carro.denominacion}"></option>
+                            </select>
+                        </div>
+                        <!--CHOFER-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="CHOFER*" th:field="*{chofer}"/>
+                            <span class="fa fa-search form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <!--DIA SALIDA-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="date" class="form-control has-feedback-left"
+                                   placeholder="F. SALIDA*" th:field="*{fechaSalida}"/>
+                            <span class="fa fa-search form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <!--DIA REGRESO-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="date" class="form-control has-feedback-left"
+                                   placeholder="F. LLEGADA*" th:field="*{fechaLlegada}"/>
+                            <span class="fa fa-search form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <!--PRECIO-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="PRECIO*" th:field="*{precio}"/>
+                            <span class="fa fa-search form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-4 col-xs-12">
+                                <!-- <button type="button" class="btn btn-primary">Cancel</button>
+                                 <button class="btn btn-primary" type="reset">Reset</button>-->
+                                <button type="submit" class="btn btn-info btn-md">
+                                    GUARDAR
+                                    <span class="fa fa-check"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalEndoce" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">REGISTRO ENDOCES</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal form-label-left input_mask"
+                          th:action="@{/MantenimientoReservacion/SaveEndoce}"
+                          th:object="${endoceObject}" method="post">
+
+                        <div class="form-group">
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="hidden" class="form-control" th:field="*{endoceId}"
+                                       placeholder=""></input>
+                            </div>
+                        </div>
+
+                        <!--nOMBRE EMPRESA-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="EMPRESA*" th:field="*{denominacion}"/>
+                            <span class="fa fa-search form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+
+                        <!--DESCRIPCION-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="DESCRIPCION*" th:field="*{descripcion}"/>
+                            <span class="fa fa-search form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+                        <br/>
+
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-4 col-xs-12">
+                                <!-- <button type="button" class="btn btn-primary">Cancel</button>
+                                 <button class="btn btn-primary" type="reset">Reset</button>-->
+                                <button type="submit" class="btn btn-info btn-md">
+                                    GUARDAR
+                                    <span class="fa fa-check"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

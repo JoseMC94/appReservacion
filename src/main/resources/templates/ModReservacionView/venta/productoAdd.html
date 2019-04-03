@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<body>
+<div th:fragment="content">
+
+
+
+
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>PRODUCTOS </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="col-md-8 col-md-offset-2">
+
+                    <form class="form-horizontal form-label-left input_mask"
+                          th:action="@{/Producto/SaveProducto}"
+                          th:object="${ventaObject}" method="post">
+
+                        <div class="form-group">
+                            <!--id   th:field="*{ventaId}" -->
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="hidden" class="form-control" placeholder="" th:field="*{productoId}"/>
+                            </div>
+                        </div>
+
+                        <!--nombre-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left" th:field="*{nombre}"
+                                   placeholder="NOMBRE*" required=""/>
+                            <span class="fa fa-calendar form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <!--cantidad-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="number" class="form-control has-feedback-left" placeholder="Cantidad*"
+                                   th:field="*{cantidad}"
+                                   required=""/>
+                            <span class="fa fa-file-text-o form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+                        <!--Precio-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input min="0" step="any" type="number" class="form-control has-feedback-left"
+                                   th:field="*{precio}" placeholder="PRECIO*" value=""
+                                   required=""/>
+                            <span class="fa fa-usd form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+                        <!--Descripcion-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left" placeholder="DESCRIPCION*"
+                                   th:field="*{descripcion}"
+                                   required=""/>
+                            <span class="fa fa-file-text-o form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+
+                        <div></div>
+                        <br/> <br/>
+                        <div class="form-group">
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <!-- <button type="button" class="btn btn-primary">Cancel</button>
+                                 <button class="btn btn-primary" type="reset">Reset</button>-->
+                                <button type="submit" class="btn btn-info btn-md">GUARDAR
+                                    <span class="fa fa-check"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+</body>
+</html>

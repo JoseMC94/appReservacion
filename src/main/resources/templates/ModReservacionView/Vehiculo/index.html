@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<body>
+<div th:fragment="content">
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>MANTENER VEHICULO</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form class="form-horizontal form-label-left input_mask" th:action="@{/Vehiculo/SaveVehiculo}"
+                          th:object="${vehiculoObject}" method="post">
+
+
+                        <div class="form-group">
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="hidden" class="form-control" th:field="*{vehiculoId}"
+                                       placeholder=""></input>
+                            </div>
+                        </div>
+
+                        <!--NOMBRE-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left" id="DNI"
+                                   placeholder="Nombre*" th:field="*{denominacion}"/>
+                            <span class="fa fa-search form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <!--PLACA-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="Placa*" th:field="*{placa}"/>
+                            <span class="fa  fa-phone  form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <!--CAPACIDAD-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="Capacidad*" th:field="*{capacidad}"/>
+                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <!--MARCA-->
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="Marca*" th:field="*{marca}"/>
+                            <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <!-- <button type="button" class="btn btn-primary">Cancel</button>
+                                 <button class="btn btn-primary" type="reset">Reset</button>-->
+                                <button type="submit" class="btn btn-info btn-md">GUARDAR <span class="fa fa-check"
+                                                                                                   aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>LISTA VEHICULOS</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-striped projects">
+                        <thead>
+                        <tr>
+                            <th style="width: 1%">#</th>
+                            <th style="width: 20%">Project Name</th>
+                            <th style="width: 20%">#Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="carro : ${listaVehiculos}" >
+                            <td>#</td>
+                            <td>
+                                <a><spam th:text="${carro.denominacion}"></spam></a>
+                                <br/>
+                                <small><spam th:text="${carro.marca}"></spam> - <spam th:text="${carro.placa}"></spam></small>
+                            </td>
+                            <td>
+                                <a  th:href="@{/Vehiculo/EditVehiculo/{id}(id=${carro.vehiculoId})}"  class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                                <a  th:href="@{/Vehiculo/EditVehiculo/{id}(id=${carro.vehiculoId})}"  class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                <a  th:href="@{/Vehiculo/DeleteVehiculo/{id}(id=${carro.vehiculoId})}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- end project list -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

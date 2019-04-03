@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<body>
+<div th:fragment="content">
+
+
+    <div class="row">
+
+          <div class="row">
+
+              <label> Buscar Fecha:
+                  <input id="fecha" type="date" required="" placeholder="Fecha a Buscar "/>
+              </label>
+              <button id="direccion">click</button>
+
+          </div>
+<br/>
+
+        <div class="col-md-6">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>ENTRADA DIARIA</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                        <li><a data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-striped projects">
+                        <thead>
+                        <tr>
+                            <th style="width: 1%">#</th>
+                            <th style="width: 20%">Project Name</th>
+                            <th style="width: 20%">#Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="entrada : ${listaEntradasDiarias}">
+                            <td>#</td>
+                            <td>
+                                <a>
+                                    <spam th:text="${entrada.denominacion}"></spam>
+                                </a>
+                                <br/>
+                                <small>
+                                    <spam th:text="${entrada.valor}"></spam>
+                                </small>
+                            </td>
+                            <td>
+                                <!--<a th:href="@{/MantenimientoReservacion/EditSalida/{id}(id=${carro.salidaId})}"
+                                   class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                                <a th:href="@{/MantenimientoReservacion/EditSalida/{id}(id=${carro.salidaId})}"
+                                   class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>-->
+                                <a th:href="@{/CajaChica/DeleteEntradaDiaria/{id}(id=${entrada.entradaId})}"
+                                   class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- end project list -->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>SALIDAD DIARIA</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                        <li><a data-toggle="modal" data-target="#myModalEndoce"><i class="glyphicon glyphicon-plus"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-striped projects">
+                        <thead>
+                        <tr>
+                            <th style="width: 1%">#</th>
+                            <th style="width: 20%">Project Name</th>
+                            <th style="width: 20%">#Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="salida : ${listaSalidas}">
+                            <td>#</td>
+                            <td>
+                                <a>
+                                    <spam th:text="${salida.denominacion}"></spam>
+                                </a>
+                                <br/>
+                                <small>
+                                    <spam th:text="${salida.valor}"></spam>
+                                </small>
+                            </td>
+                            <td>
+                                <!--<a th:href="@{/MantenimientoReservacion/EditEndoce/{id}(id=${carro.endoceId})}"
+                                   class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                                <a th:href="@{/MantenimientoReservacion/EditVehiculo/{id}(id=${carro.endoceId})}"
+                                   class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>-->
+                                <a th:href="@{/CajaChica/DeleteSalidaDiaria/{id}(id=${salida.salidaId})}"
+                                   class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- end project list -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row tile_count">
+        <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Total Entrada</span>
+            <div class="count"><span th:text="${totalEntrada}"></span></div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-clock-o"></i> Total Salida</span>
+            <div class="count"><span th:text="${totalSalida}"></span></div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-clock-o"></i> Total Caja</span>
+            <div class="count"><span th:text="${total}"></span></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">REGISTRO ENTRADAS</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal form-label-left input_mask"
+                          th:action="@{/CajaChica/SaveEntrada}"
+                          th:object="${entradadiariaObject}" method="post">
+
+                        <div class="form-group">
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="hidden" class="form-control" th:field="*{entradaId}"
+                                       placeholder=""></input>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="NOMBRE ENTRADA*" th:field="*{denominacion}" required=""/>
+                            <span class="fa fa-search form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="number" class="form-control has-feedback-left"
+                                   placeholder="VALOR*" th:field="*{valor}" required=""/>
+                            <span class="fa fa-search form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-4 col-xs-12">
+                                <button type="submit" class="btn btn-info btn-md">
+                                    GUARDAR
+                                    <span class="fa fa-check"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModalEndoce" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true"></span></button>
+                    <h4 class="modal-title" id="myModalLabel">REGISTRO SALIDA</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal form-label-left input_mask"
+                          th:action="@{/CajaChica/SaveSalida}"
+                          th:object="${salidadiariaObject}" method="post">
+
+                        <div class="form-group">
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="hidden" class="form-control" th:field="*{salidaId}"
+                                       placeholder=""></input>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="NOMBRE SALIDA*" th:field="*{denominacion}"/>
+                            <span class="fa fa-search form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left"
+                                   placeholder="VALOR*" th:field="*{valor}"/>
+                            <span class="fa fa-search form-control-feedback left"
+                                  aria-hidden="true"></span>
+                        </div>
+                        <br/>
+
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-4 col-xs-12">
+                                <button type="submit" class="btn btn-info btn-md">
+                                    GUARDAR
+                                    <span class="fa fa-check"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        $(document).ready(function () {
+
+            $( "#direccion" ).click(function() {
+                fecha=$("#fecha").val();
+                window.location = '/appReservacion/CajaChica/VistaFecha' + '/' + fecha;
+            });
+        });
+
+        /*]]>*/
+    </script>
+</div>
+</body>
+</html>
