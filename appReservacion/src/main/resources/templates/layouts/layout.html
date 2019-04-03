@@ -93,14 +93,14 @@
                         <ul class="nav side-menu">
                             <li class="active"><a th:href="@{/Home/}"><i class="fa fa-home"></i> Home</a>
                             </li>
-                            <li class="active"><a th:href="@{/Producto/Producto/}"><i class="fa fa-briefcase"></i> Producto</a>
+                            <!--<li class="active"><a th:href="@{/Producto/Producto/}"><i class="fa fa-briefcase"></i> Producto</a>
                             </li>
 
                             <li class="active"><a th:href="@{/Persona/Persona/}"><i class="fa fa-user"></i> Cliente</a>
                             </li>
 
                             <li class="active"><a th:href="@{/Venta/Venta/}"><i class="fa fa-money"></i> Cobro</a>
-                            </li>
+                            </li>-->
 
                             <li th:each="menu : ${menus}" th:if="${menu.indPadre}">
                                 <a><i th:class="${menu.icono}"></i> <span th:text="${menu.denominacion}"></span> <span
