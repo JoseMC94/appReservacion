@@ -32,14 +32,15 @@ public class PersonaController {
 
     @GetMapping(value = {"/home", "/", "/index", "/Persona"})
     public ModelAndView index() {
-        ModelAndView model = new ModelAndView("/modSeguridadView/Persona/Persona");
+        //ModelAndView model = new ModelAndView("/modSeguridadView/Persona/Persona");
+        ModelAndView model = new ModelAndView("ModSeguridadView/Persona/Persona");
         model.addObject("listaPersonas", personaService.listAllPersona());
         return model;
     }
 
     @GetMapping("/AddPersona")
     public ModelAndView addPersona(@ModelAttribute("persona") Persona persona) {
-        ModelAndView mv = new ModelAndView("/modSeguridadView/Persona/PersonaEdit");
+        ModelAndView mv = new ModelAndView("ModSeguridadView/Persona/PersonaEdit");
         mv.addObject("personaObject", persona);
         return mv;
     }

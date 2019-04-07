@@ -26,7 +26,7 @@ public class ReporteController {
 
     @GetMapping(value = {"/home", "/Reporte", "", "/", "/index", "/Mantenimiento"})
     public ModelAndView index(ArrayList<Venta> l) {
-        ModelAndView model = new ModelAndView("/ModReservacionView/venta/Reportes");
+        ModelAndView model = new ModelAndView("ModReservacionView/venta/Reportes");
         model.addObject("lista", l);
         double ingresos = 0;
         double egresos = 0;
