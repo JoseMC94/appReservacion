@@ -17,7 +17,9 @@ public class Venta {
     private int personaId;
     Persona personaByPersonaId;
 
-    @Id
+    public Venta(){
+    }
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "VentaId")
     public int getVentaId() {
         return ventaId;

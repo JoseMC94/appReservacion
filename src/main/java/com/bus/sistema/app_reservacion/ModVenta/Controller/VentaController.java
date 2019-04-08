@@ -1,11 +1,13 @@
 package com.bus.sistema.app_reservacion.ModVenta.Controller;
 
 import com.bus.sistema.app_reservacion.ModSeguridad.Services.PersonaService;
+import com.bus.sistema.app_reservacion.ModSeguridad.Util.Util;
 import com.bus.sistema.app_reservacion.ModVenta.Domain.Venta;
 import com.bus.sistema.app_reservacion.ModVenta.Repository.VentaRepository;
 import com.bus.sistema.app_reservacion.ModVenta.Services.VentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.ArrayList;
 
 @CrossOrigin(origins = "*")
@@ -37,7 +40,9 @@ public class VentaController {
         ModelAndView model = new ModelAndView("/ModReservacionView/venta/Clientelist");
         model.addObject("listaPersonas", personaService.listAllPersona());
 
-        System.out.println("\n\nLista: "+ ventaRepository.listarPorUsuarioyFecha(3,4,2019)+"\n\n");
+/*
+        System.out.println("\n\nLista: " + ventaRepository.listarPorUsuarioyFecha(3, 4, 2019) + "\n\n");
+*/
         return model;
     }
 
@@ -45,28 +50,44 @@ public class VentaController {
     public ModelAndView addVenta(@PathVariable("id") int id, @ModelAttribute("venta") Venta venta) {
         ModelAndView model = new ModelAndView("/ModReservacionView/venta/Venta");
         venta.setPersonaId(id);
+        venta.setFecha(new Date(System.currentTimeMillis()));
         venta.setPersonaByPersonaId(personaService.findOneById(id));
-        model.addObject("listaVentaPorPersona", ventaRepository.findAllByPersonaId(id));
+        model.addObject("listaVentaPorPersona", ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(id));
         model.addObject("ventaObject", venta);
-        ArrayList<Venta> listVenta = ventaRepository.findAllByPersonaId(venta.getPersonaId());
+        ArrayList<Venta> listVenta = ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(venta.getPersonaId());
+        model.addObject("deudaAgregar", true);
+
+
+
+        model.addObject("admin", false);
         if (!listVenta.isEmpty()) {
             model.addObject("saldo", listVenta.get(listVenta.size() - 1).getMontoSaldo());
-        }
-        else{
+
+            // Pruebas
+            int finalLista = ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(venta.getPersonaId()).size() - 1;
+            System.out.println("\n\n utimo registro fecha" + ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(venta.getPersonaId()).get(finalLista).getFecha() + "\n\n");
+            //validacionRegistrosDiarios(ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(venta.getPersonaId()).get(finalLista).getFecha(), venta, model);
+
+            model.addObject("diasDeuda", contarDeudasDiarias(venta));
+
+            if (contarDeudasDiarias(venta) > 15)
+                model.addObject("deudaAgregar", false);
+
+
+        } else
             model.addObject("saldo", 0);
-
-        }
-
+        if (SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("admin"))
+            model.addObject("admin", true);
         return model;
     }
 
 
-
     @PostMapping("/SaveVentaDescontar")
     public ModelAndView save(@Valid Venta venta, BindingResult result, String single_cal3) {
+        venta.setDescripcion("cobro Diario");
         if (result.hasErrors())
             return addVenta(venta.getPersonaId(), venta);
-        ArrayList<Venta> listVenta = ventaRepository.findAllByPersonaId(venta.getPersonaId());
+        ArrayList<Venta> listVenta = ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(venta.getPersonaId());
         if (!listVenta.isEmpty()) {
             venta.setMontoSaldo(listVenta.get(listVenta.size() - 1).getMontoSaldo().subtract(venta.getMontoDescuento()));
         }
@@ -80,7 +101,7 @@ public class VentaController {
             return addVenta(venta.getPersonaId(), venta);
         // logica guardar
         // si es el primer producto o deuda lista null
-        ArrayList<Venta> listVenta = ventaRepository.findAllByPersonaId(venta.getPersonaId());
+        ArrayList<Venta> listVenta = ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(venta.getPersonaId());
         System.out.println("\n\n" + listVenta + "\n\n");
         if (!listVenta.isEmpty()) {
             venta.setMontoSaldo(listVenta.get(listVenta.size() - 1).getMontoSaldo().add(venta.getMontoSaldo()));
@@ -89,4 +110,58 @@ public class VentaController {
         ventaService.save(venta);
         return addVenta(venta.getPersonaId(), venta);
     }
+
+    // Ejecutar al cargar vista venta cobrar
+    public void validacionRegistrosDiarios(Date ultimoRegistro, Venta venta, ModelAndView model) {
+        if (Util.numeroDiasEntreDosFechas(ultimoRegistro, new Date(System.currentTimeMillis())) != 0) {
+            // lista
+            if (venta.getPersonaByPersonaId().getGrupo().equalsIgnoreCase("GRUPO A - MERCADO NERY GARCIA")) {
+                // cobro Diario
+                System.out.println("\n\n Dias pasados desde la ultima fecha " + Util.numeroDiasEntreDosFechas(ultimoRegistro, new Date(System.currentTimeMillis())) + "\n\n");
+                ;
+                System.out.println("Se hara " + Util.numeroDiasEntreDosFechas(ultimoRegistro, new Date(System.currentTimeMillis())) + "inserts: ");
+                Date fechaActual = ultimoRegistro;
+                for (int i = 1; i < Util.numeroDiasEntreDosFechas(ultimoRegistro, new Date(System.currentTimeMillis())); i++) {
+                    Venta venta1 = new Venta();
+                    venta1.setPersonaId(venta.getPersonaId());
+                    venta1.setMontoDescuento(BigDecimal.valueOf(0));
+                    venta1.setDescripcion("No hubo pago");
+                    fechaActual.setTime((long) fechaActual.getTime() + (86400000 * 2));
+                    System.out.println(fechaActual);
+                    venta1.setFecha(fechaActual);
+                    ArrayList<Venta> listVenta = ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(venta.getPersonaId());
+                    venta1.setMontoSaldo(listVenta.get(listVenta.size() - 1).getMontoSaldo());
+                    venta1.setPersonaByPersonaId(venta.getPersonaByPersonaId());
+                    ventaRepository.save(venta1);
+                    System.out.println("Se guardo registro");
+                }
+            }
+
+
+            if (venta.getPersonaByPersonaId().getGrupo().equalsIgnoreCase("GRUPO B - MERCADO MAGDALENA")) {
+                // si no hay 20 dias de cobro Amarillo
+            }
+
+        }
+
+
+    }
+
+    public int contarDeudasDiarias(Venta venta) {
+        // 7 dias Verde
+        ArrayList<Venta> listVentaDiaria = ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(venta.getPersonaId());
+        int verde = 0;
+        for (Venta ventasSinCobrar : listVentaDiaria) {
+            if (ventasSinCobrar.getMontoDescuento().compareTo(BigDecimal.valueOf(0)) == 0) {
+                verde = verde + 1;
+            } else {
+                verde = 0;
+            }
+        }
+
+        System.out.println("verdes:" + verde);
+        return verde;
+
+    }
+
 }

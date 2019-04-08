@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.sql.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -48,10 +49,16 @@ public class PersonaController {
     @PostMapping("/SavePersona")
     public ModelAndView save(@Valid Persona persona, BindingResult result, String single_cal3) {
         persona.setNombreCompleto(persona.getNombres() + " " + persona.getPaterno() + " " + persona.getMaterno());
-        if (result.hasErrors()) {
+        if (persona.getFechaNacimiento()==null)
+            persona.setFechaNacimiento(new Date(System.currentTimeMillis()));
+        if (persona.getPaterno().equalsIgnoreCase(null))
+            persona.setPaterno("");
+        if (persona.getMaterno().equalsIgnoreCase(null))
+            persona.setMaterno("");
+       /* if (result.hasErrors()) {
             System.out.println("\n\nerror: " + result.getAllErrors());
             return addPersona(persona);
-        }
+        }*/
         personaService.save(persona);
         return index();
     }

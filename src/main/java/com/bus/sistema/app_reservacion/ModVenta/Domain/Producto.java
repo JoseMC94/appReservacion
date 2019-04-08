@@ -14,6 +14,9 @@ public class Producto {
     private String descripcion;
     private BigDecimal precio;
     private int cantidad;
+    private String marca;
+    private String talla;
+    private String color;
 
     @Id
     @Column(name = "ProductoId")
@@ -61,6 +64,10 @@ public class Producto {
         return cantidad;
     }
 
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
@@ -80,5 +87,35 @@ public class Producto {
     @Override
     public int hashCode() {
         return Objects.hash(productoId, nombre, descripcion, precio, cantidad);
+    }
+
+    @Basic
+    @Column(name = "Marca")
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    @Basic
+    @Column(name = "Talla")
+    public String getTalla() {
+        return talla;
+    }
+
+    public void setTalla(String talla) {
+        this.talla = talla;
+    }
+
+    @Basic
+    @Column(name = "Color")
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

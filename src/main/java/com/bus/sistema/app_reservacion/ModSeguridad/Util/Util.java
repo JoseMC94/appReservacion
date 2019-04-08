@@ -6,9 +6,11 @@ import com.bus.sistema.app_reservacion.ModReservacion.Domain.Salidadiaria;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
+
 
 public class Util {
 
@@ -56,20 +58,29 @@ public class Util {
     /**
      * Encripyat contraseña Bcry
      */
-    public  static String encriptarContrasena(String pass){
+    public static String encriptarContrasena(String pass) {
         return new BCryptPasswordEncoder().encode(pass);
-    }
-
-    public static void main(String[] args) {
-        for (int i = 0; i < 5; i++) {
-            System.out.println( encriptarContrasena("admin"));
-
-        }
-
-        Stream<String> streamEmpty = Stream.empty();
     }
 
     public Stream<String> streamOf(List<String> list) {
         return list == null || list.isEmpty() ? Stream.empty() : list.stream();
+    }
+
+    public static int numeroDiasEntreDosFechas(Date fecha1, Date fecha2) {
+        long startTime = fecha1.getTime();
+        long endTime = fecha2.getTime();
+        long diffTime = endTime - startTime;
+        return (int) TimeUnit.DAYS.convert(diffTime, TimeUnit.MILLISECONDS);
+    }
+
+    public static void main(String[] args) {
+
+        for (int i = 0; i < 5; i++)
+            System.out.println(encriptarContrasena("admin"));
+
+        Stream<String> streamEmpty = Stream.empty();
+
+        System.out.println(numeroDiasEntreDosFechas(new Date(System.currentTimeMillis()), Date.valueOf("2019-04-10")));
+
     }
 }

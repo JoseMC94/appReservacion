@@ -23,14 +23,14 @@ public class ProductoController {
 
     @GetMapping(value = {"/home", "/Producto","", "/", "/index", "/Mantenimiento"})
     public ModelAndView index() {
-        ModelAndView model = new ModelAndView("/ModReservacionView/venta/Producto");
+        ModelAndView model = new ModelAndView("ModReservacionView/venta/Producto");
         model.addObject("listaProductos", productoRepository.findAll());
         return model;
     }
 
     @GetMapping("/AddProducto")
     public ModelAndView addProducto( @ModelAttribute("venta") Producto producto) {
-        ModelAndView model = new ModelAndView("/ModReservacionView/venta/productoAdd");
+        ModelAndView model = new ModelAndView("ModReservacionView/venta/productoAdd");
         model.addObject("ventaObject", producto);
         return model;
     }

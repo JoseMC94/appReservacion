@@ -32,6 +32,15 @@ public class Persona {
     private Collection<Pasaje> pasajesByPersonaId;
     @JsonIgnore
     private Collection<Venta> ventasByPersonaId;
+    private String grupo;
+
+    public Persona(int personaId, String nombreCompleto) {
+        this.personaId = personaId;
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    public Persona() {
+    }
 
     @Id
     @Column(name = "PersonaId", nullable = false)
@@ -229,10 +238,13 @@ public class Persona {
                 '}';
     }
 
-    public Persona(int personaId, String nombreCompleto) {
-        this.personaId = personaId;
-        this.nombreCompleto = nombreCompleto;
+    @Basic
+    @Column(name = "Grupo")
+    public String getGrupo() {
+        return grupo;
     }
-    public Persona() {
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
     }
 }
