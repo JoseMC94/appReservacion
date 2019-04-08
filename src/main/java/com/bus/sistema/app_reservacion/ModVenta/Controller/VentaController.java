@@ -48,7 +48,7 @@ public class VentaController {
 
     @GetMapping("/AddVenta/{id}")
     public ModelAndView addVenta(@PathVariable("id") int id, @ModelAttribute("venta") Venta venta) {
-        ModelAndView model = new ModelAndView("/ModReservacionView/venta/Venta");
+        ModelAndView model = new ModelAndView("ModReservacionView/venta/Venta");
         venta.setPersonaId(id);
         venta.setFecha(new Date(System.currentTimeMillis()));
         venta.setPersonaByPersonaId(personaService.findOneById(id));
