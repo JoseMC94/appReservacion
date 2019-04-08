@@ -37,7 +37,7 @@ public class VentaController {
 
     @GetMapping(value = {"/home", "", "/Venta", "/", "/index", "/Mantenimiento"})
     public ModelAndView index() {
-        ModelAndView model = new ModelAndView("/ModReservacionView/venta/Clientelist");
+        ModelAndView model = new ModelAndView("ModReservacionView/venta/Clientelist");
         model.addObject("listaPersonas", personaService.listAllPersona());
 
 /*
