@@ -16,7 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -48,21 +52,23 @@ public class VentaController {
 
     @GetMapping("/AddVenta/{id}")
     public ModelAndView addVenta(@PathVariable("id") int id, @ModelAttribute("venta") Venta venta) {
+        DateFormat outFormat = new SimpleDateFormat("dd/MM/yyyy");
+        outFormat.setTimeZone(TimeZone.getTimeZone("America/Lima"));
+        SimpleDateFormat dateformat3 = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date fechaPeru = null;
+        try {
+            fechaPeru = dateformat3.parse(outFormat.format(new java.util.Date()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         ModelAndView model = new ModelAndView("ModReservacionView/venta/Venta");
         venta.setPersonaId(id);
-        venta.setFecha(new Date(System.currentTimeMillis()));
+        venta.setFecha(new Date(fechaPeru.getTime()));
         venta.setPersonaByPersonaId(personaService.findOneById(id));
         model.addObject("listaVentaPorPersona", ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(id));
         model.addObject("ventaObject", venta);
         ArrayList<Venta> listVenta = ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(venta.getPersonaId());
-        System.out.println("\n\n");
-        for (Venta v : listVenta) {
-            System.out.println(v);
-        }
-        System.out.println("\n\n");
         model.addObject("deudaAgregar", true);
-
-
         model.addObject("admin", false);
         if (!listVenta.isEmpty()) {
             model.addObject("saldo", listVenta.get(listVenta.size() - 1).getMontoSaldo());

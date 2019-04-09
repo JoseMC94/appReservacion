@@ -103,7 +103,8 @@
                         </div>
                         <!--Monto-->
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                            <input min="0" step="any" type="number" class="form-control has-feedback-left" id="descuento"
+                            <input min="0" step="any" type="number" class="form-control has-feedback-left"
+                                   id="descuento"
                                    th:field="*{montoDescuento}" placeholder="MONTO*" value=""
                                    required=""/>
                             <span class="fa fa-usd form-control-feedback left"
@@ -125,7 +126,8 @@
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <!-- <button type="button" class="btn btn-primary">Cancel</button>
                                  <button class="btn btn-primary" type="reset">Reset</button>-->
-                                <button type="submit" class="btn btn-info btn-md" onclick="mostrarSaldoDescuento()">GUARDAR
+                                <button type="submit" class="btn btn-info btn-md" onclick="mostrarSaldoDescuento()">
+                                    GUARDAR
                                     <span class="fa fa-check"
                                           aria-hidden="true"></span>
                                 </button>
@@ -195,7 +197,8 @@
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <!-- <button type="button" class="btn btn-primary">Cancel</button>
                                  <button class="btn btn-primary" type="reset">Reset</button>-->
-                                <button type="submit" class="btn btn-info btn-md" onclick="mostrarSaldoAumento()">GUARDAR
+                                <button type="submit" class="btn btn-info btn-md" onclick="mostrarSaldoAumento()">
+                                    GUARDAR
                                     <span class="fa fa-check"
                                           aria-hidden="true"></span>
                                 </button>
@@ -212,23 +215,30 @@
 
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
-        function  mostrarSaldoDescuento(){
+        function mostrarSaldoDescuento() {
             var saldo = Number($("#saldo").text());
             var descuetno = $("#descuento").val();
-            var resultado= saldo-descuetno;
-            alert("SALDO : "+resultado);
+            var resultado = saldo - descuetno;
+            alert("SALDO : " + resultado);
+            $('#myModalDescontar').modal('hide')
 
         };
-        function  mostrarSaldoAumento(){
+
+        function mostrarSaldoAumento() {
             var saldo = Number($("#saldo").text());
             var aumento = Number($("#aumento").val())
-            var resultado= saldo+aumento;
-            alert("SALDO : "+resultado);
+            var resultado = saldo + aumento;
+            alert("SALDO : " + resultado);
+            $('#myModalAgregar').modal('hide')
+
 
         };
         $(document).ready(function () {
             $('#tabla1').DataTable({
                 "lengthChange": false,
+                "oLanguage": {
+                    "sSearch": "BUSCAR      " //search
+                }
             });
         });
         /*]]>*/
