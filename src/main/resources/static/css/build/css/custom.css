@@ -196,7 +196,7 @@ html , body{
 .nav-sm .nav.side-menu li a {
     text-align: center !important;
     font-weight: 400;
-    font-size: 10px;
+    font-size: 18px;
     padding: 10px 5px
 }
 .nav-sm .nav.child_menu li.active,
@@ -234,7 +234,8 @@ html , body{
     padding: 0 10px
 }
 .nav-sm ul.nav.child_menu li a {
-    text-align: left !important
+    text-align: left !important;
+    font-size: 15px;
 }
 .nav-sm .profile {
     display: none

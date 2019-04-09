@@ -15,10 +15,10 @@
     <div class="signin">
         <form  th:action="@{/logincheck}" method="post">
             <input type="hidden" name="${_csrf.parameterName}" value="{_csrf.token}" />
-            <input type="text" name="username" class="user" value="SISTEMA" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'admin';}" />
-            <input type="password" name="password" class="pass" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'admin';}" />
+            <input type="text" name="username" class="user"/>
+            <input type="password" name="password" class="pass"/>
             <label>
-                <input type="checkbox" value="Remember-Me" /> Remember Me?
+                <input type="checkbox" id="remember_me" name="remember-me"/> Remember Me?
             </label>
             <input type="submit" value="LOGIN" />
             <div th:if="${error != null}" class="alert alert-danger" role="alert" >Usuario / Contraseña invalido</div>

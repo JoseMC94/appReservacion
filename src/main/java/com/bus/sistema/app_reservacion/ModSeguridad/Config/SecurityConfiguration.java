@@ -46,6 +46,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/loginsucces")
                 .permitAll()
                 .and()
+                .rememberMe()
+                .tokenValiditySeconds(86400)
+                .key("uniqueAndSecret")
+                .and()
                 .logout()
                 .permitAll();
 

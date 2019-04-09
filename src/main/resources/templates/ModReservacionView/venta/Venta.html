@@ -29,7 +29,7 @@
             <div class="x_content">
 
                 <center>
-                    <h2>SALDO: <span th:text="${saldo}"></span></h2>
+                    <h2>SALDO: <span id="saldo" th:value="${saldo}" th:text="${saldo}"></span></h2>
                     <h2>No ha pagado hace: <span th:text="${diasDeuda}"></span> dias</h2>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalDescontar">
                         DESCONTAR
@@ -103,7 +103,7 @@
                         </div>
                         <!--Monto-->
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                            <input min="0" step="any" type="number" class="form-control has-feedback-left"
+                            <input min="0" step="any" type="number" class="form-control has-feedback-left" id="descuento"
                                    th:field="*{montoDescuento}" placeholder="MONTO*" value=""
                                    required=""/>
                             <span class="fa fa-usd form-control-feedback left"
@@ -125,7 +125,7 @@
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <!-- <button type="button" class="btn btn-primary">Cancel</button>
                                  <button class="btn btn-primary" type="reset">Reset</button>-->
-                                <button type="submit" class="btn btn-info btn-md">GUARDAR
+                                <button type="submit" class="btn btn-info btn-md" onclick="mostrarSaldoDescuento()">GUARDAR
                                     <span class="fa fa-check"
                                           aria-hidden="true"></span>
                                 </button>
@@ -173,7 +173,7 @@
 
                         <!--Monto-->
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                            <input min="0" step="any" type="number" class="form-control has-feedback-left"
+                            <input min="0" step="any" type="number" class="form-control has-feedback-left" id="aumento"
                                    th:field="*{MontoSaldo}" placeholder="MONTO*" value=""
                                    required=""/>
                             <span class="fa fa-usd form-control-feedback left"
@@ -195,7 +195,7 @@
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <!-- <button type="button" class="btn btn-primary">Cancel</button>
                                  <button class="btn btn-primary" type="reset">Reset</button>-->
-                                <button type="submit" class="btn btn-info btn-md">GUARDAR
+                                <button type="submit" class="btn btn-info btn-md" onclick="mostrarSaldoAumento()">GUARDAR
                                     <span class="fa fa-check"
                                           aria-hidden="true"></span>
                                 </button>
@@ -212,6 +212,20 @@
 
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
+        function  mostrarSaldoDescuento(){
+            var saldo = Number($("#saldo").text());
+            var descuetno = $("#descuento").val();
+            var resultado= saldo-descuetno;
+            alert("SALDO : "+resultado);
+
+        };
+        function  mostrarSaldoAumento(){
+            var saldo = Number($("#saldo").text());
+            var aumento = Number($("#aumento").val())
+            var resultado= saldo+aumento;
+            alert("SALDO : "+resultado);
+
+        };
         $(document).ready(function () {
             $('#tabla1').DataTable({
                 "lengthChange": false,

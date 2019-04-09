@@ -63,7 +63,7 @@ public class Util {
     }
 
     public Stream<String> streamOf(List<String> list) {
-        return list == null || list.isEmpty() ? Stream.empty() : list.stream();
+        return list == null || list.isEmpty () ? Stream.empty() : list.stream();
     }
 
     public static int numeroDiasEntreDosFechas(Date fecha1, Date fecha2) {
@@ -75,12 +75,14 @@ public class Util {
 
     public static void main(String[] args) {
 
-        for (int i = 0; i < 5; i++)
+        System.out.println(encriptarContrasena("vendedor@"));
+
+        /*for (int i = 0; i < 5; i++)
             System.out.println(encriptarContrasena("admin"));
 
         Stream<String> streamEmpty = Stream.empty();
 
         System.out.println(numeroDiasEntreDosFechas(new Date(System.currentTimeMillis()), Date.valueOf("2019-04-10")));
-
+*/
     }
 }

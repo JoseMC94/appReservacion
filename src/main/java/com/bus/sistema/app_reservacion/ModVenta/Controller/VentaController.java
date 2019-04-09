@@ -55,8 +55,12 @@ public class VentaController {
         model.addObject("listaVentaPorPersona", ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(id));
         model.addObject("ventaObject", venta);
         ArrayList<Venta> listVenta = ventaRepository.findAllByPersonaIdOrderByVentaIdAsc(venta.getPersonaId());
+        System.out.println("\n\n");
+        for (Venta v : listVenta) {
+            System.out.println(v);
+        }
+        System.out.println("\n\n");
         model.addObject("deudaAgregar", true);
-
 
 
         model.addObject("admin", false);
@@ -92,7 +96,8 @@ public class VentaController {
             venta.setMontoSaldo(listVenta.get(listVenta.size() - 1).getMontoSaldo().subtract(venta.getMontoDescuento()));
         }
         ventaService.save(venta);
-        return addVenta(venta.getPersonaId(), venta);
+        // return addVenta(venta.getPersonaId(), venta);
+        return index();
     }
 
     @PostMapping("/SaveVentaAgregar")
@@ -108,7 +113,8 @@ public class VentaController {
         }
         venta.setMontoDescuento(BigDecimal.valueOf(0));
         ventaService.save(venta);
-        return addVenta(venta.getPersonaId(), venta);
+        //return addVenta(venta.getPersonaId(), venta);
+        return index();
     }
 
     // Ejecutar al cargar vista venta cobrar

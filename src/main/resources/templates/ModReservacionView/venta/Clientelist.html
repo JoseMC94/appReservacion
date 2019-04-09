@@ -37,7 +37,8 @@
 
                 <tbody>
                 <tr th:each="persona : ${listaPersonas}">
-                    <td><a th:text="${persona.nombreCompleto}"></a></td>
+                    <td><a th:text="${persona.nombreCompleto}"></a>
+                        <br/> referencia: <a th:text="${persona.referencia}"></a></td>
                     <td>
                         <a  th:href="@{/Persona/EditPersona/{id}(id=${persona.personaId})}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> EDITAR </a>
                         <a  th:href="@{/Venta/AddVenta/{id}(id=${persona.personaId})}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
@@ -59,7 +60,7 @@
             $('#tabla1').DataTable({
                 "lengthChange": false,
                 "oLanguage": {
-                    "sSearch": "BUSCAR" //search
+                    "sSearch": "BUSCAR      " //search
                 }
             });
         });
