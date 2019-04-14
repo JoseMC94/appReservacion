@@ -101,9 +101,10 @@ public class VentaController {
         try {
             fechaPeru = dateformat3.parse(outFormat.format(new java.util.Date()));
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println("\n\nerror convesion fecha: "+e+"\n\n");;
         }
-        System.out.println("\n\n"+venta.getFecha()+"\n\n");
+        System.out.println("\n\n Fecha por defecto"+venta.getFecha()+"\n\n");
+        System.out.println("setting fecha");
         venta.setFecha(new Date(fechaPeru.getTime()));
         venta.setDescripcion("cobro Diario");
         if (result.hasErrors())
