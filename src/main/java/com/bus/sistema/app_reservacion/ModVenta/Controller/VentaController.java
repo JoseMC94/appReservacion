@@ -19,6 +19,8 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
@@ -101,11 +103,13 @@ public class VentaController {
         try {
             fechaPeru = dateformat3.parse(outFormat.format(new java.util.Date()));
         } catch (ParseException e) {
-            System.out.println("\n\nerror convesion fecha: "+e+"\n\n");;
+            System.out.println("\n\nerror convesion fecha: " + e + "\n\n");
+            ;
         }
-        System.out.println("\n\n Fecha por defecto"+venta.getFecha()+"\n\n");
+        System.out.println("\n\n Fecha por defecto" + venta.getFecha() + "\n\n");
         System.out.println("setting fecha");
-        venta.setFecha(new Date(fechaPeru.getTime()));
+        LocalDate fech = convertToLocalDateViaInstant(fechaPeru);
+        venta.setFecha(Date.valueOf(fech));
         venta.setDescripcion("cobro Diario");
         if (result.hasErrors())
             return addVenta(venta.getPersonaId(), venta);
@@ -188,4 +192,8 @@ public class VentaController {
 
     }
 
+
+    public LocalDate convertToLocalDateViaInstant(java.util.Date dateToConvert) {
+        return dateToConvert.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
 }
