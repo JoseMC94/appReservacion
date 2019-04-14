@@ -94,6 +94,17 @@ public class VentaController {
 
     @PostMapping("/SaveVentaDescontar")
     public ModelAndView save(@Valid Venta venta, BindingResult result, String single_cal3) {
+        DateFormat outFormat = new SimpleDateFormat("dd/MM/yyyy");
+        outFormat.setTimeZone(TimeZone.getTimeZone("America/Lima"));
+        SimpleDateFormat dateformat3 = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date fechaPeru = null;
+        try {
+            fechaPeru = dateformat3.parse(outFormat.format(new java.util.Date()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println("\n\n"+venta.getFecha()+"\n\n");
+        venta.setFecha(new Date(fechaPeru.getTime()));
         venta.setDescripcion("cobro Diario");
         if (result.hasErrors())
             return addVenta(venta.getPersonaId(), venta);
