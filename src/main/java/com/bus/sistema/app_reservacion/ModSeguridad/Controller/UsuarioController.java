@@ -29,7 +29,7 @@ public class UsuarioController {
 
     @GetMapping(value = {"/home", "/", "/index", "/Usuarios", "/Seguridad"})
     public ModelAndView index() {
-        ModelAndView model = new ModelAndView("modSeguridadView/Roles/index");
+        ModelAndView model = new ModelAndView("ModSeguridadView/Roles/index");
         model.addObject("listaUsuarios", userService.findAll());
         System.out.println("\n\n"+userService.findAll()+"\n\n");
         return model;
@@ -42,7 +42,7 @@ public class UsuarioController {
 
     @GetMapping("/AddUsuario")
     public ModelAndView addUsuario(@ModelAttribute("usuario") User usuario,@ModelAttribute("roles") ArrayList<Menu> menuArrayList) {
-        ModelAndView mv = new ModelAndView("modSeguridadView/Roles/Mantenimiento");
+        ModelAndView mv = new ModelAndView("ModSeguridadView/Roles/Mantenimiento");
         mv.addObject("usuarioObject", usuario);
         mv.addObject("menuArrayList", menuArrayList);
         mv.addObject("listaMenu",menuService.listAllMenu());
