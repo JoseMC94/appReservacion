@@ -31,7 +31,7 @@ public class PersonaController {
     @Qualifier("personaServiceImpl")
     private PersonaService personaService;
 
-    @GetMapping(value = {"/home", "/", "/index", "/Persona"})
+    @GetMapping(value = {"/home", "/", "/index", "/Persona", "/Clientes"})
     public ModelAndView index() {
         //ModelAndView model = new ModelAndView("/modSeguridadView/Persona/Persona");
         ModelAndView model = new ModelAndView("ModSeguridadView/Persona/Persona");

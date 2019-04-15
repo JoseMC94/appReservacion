@@ -47,4 +47,18 @@ public class ReporteController {
     public ModelAndView save(@RequestParam("nombreCompleto") String nombreCompleto, @RequestParam("mes") int mes, @RequestParam("ano") int ano) {
         return index(ventaRepository.listarPorUsuarioyFecha(personaRepository.findByNombreCompleto(nombreCompleto).getPersonaId(), mes, ano));
     }
+
+
+    @GetMapping(value = {"/Reporte Personalizar"})
+    public ModelAndView ReportePersonalizado() {
+        ModelAndView model = new ModelAndView("ModReservacionView/venta/ReportesPersonalizar");
+        return model;
+    }
+
+
+    @GetMapping(value = {"/Reporte General"})
+    public ModelAndView ReporteGeneral() {
+        ModelAndView model = new ModelAndView("ModReservacionView/venta/ReporteGeneral");
+        return model;
+    }
 }

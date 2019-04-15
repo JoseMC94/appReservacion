@@ -41,7 +41,7 @@ public class VentaController {
     @Qualifier("VentaRepository")
     private VentaRepository ventaRepository;
 
-    @GetMapping(value = {"/home", "", "/Venta", "/", "/index", "/Mantenimiento"})
+    @GetMapping(value = {"/home", "", "/Venta", "/", "/index", "/Mantenimiento","/Cobranza"})
     public ModelAndView index() {
         ModelAndView model = new ModelAndView("ModReservacionView/venta/Clientelist");
         model.addObject("listaPersonas", personaService.listAllPersona());
