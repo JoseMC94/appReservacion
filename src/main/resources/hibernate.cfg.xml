@@ -4,8 +4,8 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://byjvsqsuoflpm2ly6ejg-mysql.services.clever-cloud.com:3306/byjvsqsuoflpm2ly6ejg</property>
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url"><![CDATA[jdbc:mysql://166.62.73.130:3306/appCobro?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC]]></property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <!--<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>-->
         <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Menu"/>
         <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Persona"/>
@@ -33,6 +33,7 @@
         <mapping class="com.bus.sistema.app_reservacion.ModVenta.Domain.Venta"/>
         <mapping class="com.bus.sistema.app_reservacion.ModSeguridad.Domain.Venta"/>
         <mapping class="com.bus.sistema.app_reservacion.ModVenta.Domain.Producto"/>
+        <mapping class="com.bus.sistema.app_reservacion.ModVenta.Domain.UsuarioVenta"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 
